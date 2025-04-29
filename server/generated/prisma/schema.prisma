@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Ativo {
+  id            Int      @id @default(autoincrement())
+  nome          String
+  codInterno    String   @unique
+  descricao     String?
+  valor         Decimal  @db.Decimal(10, 2)
+  status        Status
+  dataAquisicao DateTime
+  qtdReparos    Int
+}
+
+enum Status {
+  Funcional
+  Com_Defeito
+  Em_Reparo
+  Reparo_Finalizado
+}
