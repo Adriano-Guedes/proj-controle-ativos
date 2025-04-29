@@ -137,7 +137,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/adriano/Documentos/Proj-controle-ativos/proj-controle-ativos/server/generated/prisma",
+      "value": "/home/adriano/Documentos/trackPro/proj-controle-ativos/server/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -151,12 +151,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/adriano/Documentos/Proj-controle-ativos/proj-controle-ativos/server/prisma/schema.prisma",
+    "sourceFilePath": "/home/adriano/Documentos/trackPro/proj-controle-ativos/server/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
@@ -165,7 +164,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {

@@ -9,14 +9,47 @@ datasource db {
 }
 
 model Ativo {
-  id              Int      @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   nome            String
-  codInterno      String   @unique
+  codInterno      String?   @unique
   descricao       String?
-  valor           Decimal  @db.Decimal(10, 2)
-  status          Status
+  valor           Decimal   @db.Decimal(10, 2)
+  statusId        Int?
   dataAquisicao   DateTime
   qtdReparos      Int
+
+  status          StatusAtivo?  @relation(fields: [statusId], references: [id])
+}
+
+model Usuario{
+  id        String  @id @default(uuid())
+  nome      String
+  login     String  @unique
+  senha     String
+  cargoId   Int?
+
+  cargo     Cargo?  @relation(fields: [cargoId], references: [id])
+}
+
+model Cargo {
+  id       Int      @id @default(autoincrement())
+  nome     String    @unique
+
+  usuarios Usuario[]
+}
+
+model StatusAtivo {
+  id       Int      @id @default(autoincrement())
+  nome     String    @unique
+
+  ativos Ativo[]
+}
+
+model StatusManutencao {
+  id       Int      @id @default(autoincrement())
+  nome     String    @unique
+
+  manutencoes Manutencao[]
 }
 
 enum Status {
