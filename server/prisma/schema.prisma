@@ -14,21 +14,29 @@ model Ativo {
   codInterno      String?   @unique
   descricao       String?
   valor           Decimal   @db.Decimal(10, 2)
-  statusId        Int?
   dataAquisicao   DateTime
   qtdReparos      Int
 
-  status          StatusAtivo?  @relation(fields: [statusId], references: [id])
+  status            StatusAtivo?  @relation(fields: [chaveStatus], references: [id])
+  chaveStatus       Int?
+
+  responsavel       Usuario?   @relation(fields: [chaveResponsavel], references: [id])
+  chaveResponsavel  String?
+
+  localizacao       Localizacao?    @relation(fields: [chaveLocalizacao], references: [id])
+  chaveLocalizacao  Int?
 }
 
 model Usuario{
   id        String  @id @default(uuid())
   nome      String
-  login     String  @unique
+  email     String   @unique
+  login     String   @unique
   senha     String
-  cargoId   Int?
 
-  cargo     Cargo?  @relation(fields: [cargoId], references: [id])
+  cargo     Cargo?  @relation(fields: [chaveCargo], references: [id])
+  chaveCargo   Int?
+
 }
 
 model Cargo {
@@ -52,9 +60,23 @@ model StatusManutencao {
   manutencoes Manutencao[]
 }
 
-enum Status {
-  Funcional
-  Com_Defeito
-  Em_Reparo
-  Reparo_Finalizado
+model Manutencao {
+  id                  Int   @id @default(autoincrement())
+  descricao           String?
+  dataEntrada         DateTime
+  dataSaida           DateTime?
+  relatorio           String?
+
+  responsavel          Usuario   @relation(fields: [chaveResponsavel], references: [id])
+  chaveResponsavel    String
+
+  status              StatusManutencao?  @relation(fields: [chaveStatus], references: [id])
+  chaveStatus         Int
+}
+
+model Localizacao {
+  id          Int     @id @default(autoincrement())
+  endereco    String  @unique
+
+  ativos      Ativo[]
 }
