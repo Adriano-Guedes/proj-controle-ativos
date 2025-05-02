@@ -123,9 +123,50 @@ exports.Prisma.AtivoScalarFieldEnum = {
   codInterno: 'codInterno',
   descricao: 'descricao',
   valor: 'valor',
-  status: 'status',
   dataAquisicao: 'dataAquisicao',
-  qtdReparos: 'qtdReparos'
+  qtdReparos: 'qtdReparos',
+  chaveStatus: 'chaveStatus',
+  chaveResponsavel: 'chaveResponsavel',
+  chaveLocalizacao: 'chaveLocalizacao'
+};
+
+exports.Prisma.UsuarioScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  email: 'email',
+  login: 'login',
+  senha: 'senha',
+  chaveCargo: 'chaveCargo'
+};
+
+exports.Prisma.CargoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome'
+};
+
+exports.Prisma.StatusAtivoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome'
+};
+
+exports.Prisma.StatusManutencaoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome'
+};
+
+exports.Prisma.ManutencaoScalarFieldEnum = {
+  id: 'id',
+  descricao: 'descricao',
+  dataEntrada: 'dataEntrada',
+  dataSaida: 'dataSaida',
+  relatorio: 'relatorio',
+  chaveResponsavel: 'chaveResponsavel',
+  chaveStatus: 'chaveStatus'
+};
+
+exports.Prisma.LocalizacaoScalarFieldEnum = {
+  id: 'id',
+  endereco: 'endereco'
 };
 
 exports.Prisma.SortOrder = {
@@ -141,17 +182,49 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.AtivoOrderByRelevanceFieldEnum = {
   nome: 'nome',
   codInterno: 'codInterno',
-  descricao: 'descricao'
-};
-exports.Status = exports.$Enums.Status = {
-  Funcional: 'Funcional',
-  Com_Defeito: 'Com_Defeito',
-  Em_Reparo: 'Em_Reparo',
-  Reparo_Finalizado: 'Reparo_Finalizado'
+  descricao: 'descricao',
+  chaveResponsavel: 'chaveResponsavel'
 };
 
+exports.Prisma.UsuarioOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  email: 'email',
+  login: 'login',
+  senha: 'senha'
+};
+
+exports.Prisma.CargoOrderByRelevanceFieldEnum = {
+  nome: 'nome'
+};
+
+exports.Prisma.StatusAtivoOrderByRelevanceFieldEnum = {
+  nome: 'nome'
+};
+
+exports.Prisma.StatusManutencaoOrderByRelevanceFieldEnum = {
+  nome: 'nome'
+};
+
+exports.Prisma.ManutencaoOrderByRelevanceFieldEnum = {
+  descricao: 'descricao',
+  relatorio: 'relatorio',
+  chaveResponsavel: 'chaveResponsavel'
+};
+
+exports.Prisma.LocalizacaoOrderByRelevanceFieldEnum = {
+  endereco: 'endereco'
+};
+
+
 exports.Prisma.ModelName = {
-  Ativo: 'Ativo'
+  Ativo: 'Ativo',
+  Usuario: 'Usuario',
+  Cargo: 'Cargo',
+  StatusAtivo: 'StatusAtivo',
+  StatusManutencao: 'StatusManutencao',
+  Manutencao: 'Manutencao',
+  Localizacao: 'Localizacao'
 };
 
 /**

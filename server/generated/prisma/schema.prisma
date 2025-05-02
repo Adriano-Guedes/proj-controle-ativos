@@ -11,17 +11,74 @@ datasource db {
 model Ativo {
   id            Int      @id @default(autoincrement())
   nome          String
-  codInterno    String   @unique
+  codInterno    String?  @unique
   descricao     String?
   valor         Decimal  @db.Decimal(10, 2)
-  status        Status
   dataAquisicao DateTime
   qtdReparos    Int
+
+  status      StatusAtivo? @relation(fields: [chaveStatus], references: [id])
+  chaveStatus Int?
+
+  responsavel      Usuario? @relation(fields: [chaveResponsavel], references: [id])
+  chaveResponsavel String?
+
+  localizacao      Localizacao? @relation(fields: [chaveLocalizacao], references: [id])
+  chaveLocalizacao Int?
 }
 
-enum Status {
-  Funcional
-  Com_Defeito
-  Em_Reparo
-  Reparo_Finalizado
+model Usuario {
+  id    String @id @default(uuid())
+  nome  String
+  email String @unique
+  login String @unique
+  senha String
+
+  cargo      Cargo? @relation(fields: [chaveCargo], references: [id])
+  chaveCargo Int?
+
+  ativos      Ativo[]
+  manutencoes Manutencao[]
+}
+
+model Cargo {
+  id   Int    @id @default(autoincrement())
+  nome String @unique
+
+  usuarios Usuario[]
+}
+
+model StatusAtivo {
+  id   Int    @id @default(autoincrement())
+  nome String @unique
+
+  ativos Ativo[]
+}
+
+model StatusManutencao {
+  id   Int    @id @default(autoincrement())
+  nome String @unique
+
+  manutencoes Manutencao[]
+}
+
+model Manutencao {
+  id          Int       @id @default(autoincrement())
+  descricao   String?
+  dataEntrada DateTime
+  dataSaida   DateTime?
+  relatorio   String?
+
+  responsavel      Usuario @relation(fields: [chaveResponsavel], references: [id])
+  chaveResponsavel String
+
+  status      StatusManutencao? @relation(fields: [chaveStatus], references: [id])
+  chaveStatus Int
+}
+
+model Localizacao {
+  id       Int    @id @default(autoincrement())
+  endereco String @unique
+
+  ativos Ativo[]
 }

@@ -37,6 +37,8 @@ model Usuario{
   cargo     Cargo?  @relation(fields: [chaveCargo], references: [id])
   chaveCargo   Int?
 
+  ativos        Ativo[]
+  manutencoes   Manutencao[]
 }
 
 model Cargo {
@@ -67,7 +69,7 @@ model Manutencao {
   dataSaida           DateTime?
   relatorio           String?
 
-  responsavel          Usuario   @relation(fields: [chaveResponsavel], references: [id])
+  responsavel         Usuario   @relation(fields: [chaveResponsavel], references: [id])
   chaveResponsavel    String
 
   status              StatusManutencao?  @relation(fields: [chaveStatus], references: [id])
