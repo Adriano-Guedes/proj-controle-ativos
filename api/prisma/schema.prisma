@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Ativo {
+  id                Int       @id @default(autoincrement())
+  nome              String    @db.VarChar(100)
+  codInterno        String?   @unique @db.VarChar(50)
+  descricao         String?   @db.Text
+  status            String    @db.VarChar(50)
+  valor             Decimal   @db.Decimal(10, 2)
+  dataAquisicao     DateTime
+  descricaoProblema String?   @db.Text
+  qtdReparos        Int
+
+  responsavel       Usuario?   @relation(fields: [chaveResponsavel], references: [id])
+  chaveResponsavel  String?
+
+  localizacao       Localizacao?    @relation(fields: [chaveLocalizacao], references: [id])
+  chaveLocalizacao  Int?
+}
+
+model Usuario{
+  id            String  @id @default(uuid())
+  nome          String  @db.VarChar(100)
+  email         String  @unique @db.VarChar(150)
+  login         String  @unique @db.VarChar(50)
+  senha         String  @db.VarChar(255)
+
+  cargo         Cargo?  @relation(fields: [chaveCargo], references: [id])
+  chaveCargo    Int?
+
+  ativos        Ativo[]
+  historicosOrigem     HistoricoAlocacao[] @relation(name: "OrigemResponsavel")
+  historicosDestino    HistoricoAlocacao[] @relation(name: "DestinoResponsavel")
+}
+
+model Cargo {
+  id       Int      @id @default(autoincrement())
+  nome     String    @unique @db.VarChar(100)
+
+  usuarios Usuario[]
+}
+
+model Localizacao {
+  id          Int     @id @default(autoincrement())
+  endereco    String  @unique @db.VarChar(255)
+
+  ativos      Ativo[]
+  historicosOrigem     HistoricoAlocacao[] @relation(name: "OrigemLocalizacao")
+  historicosDestino    HistoricoAlocacao[] @relation(name: "DestinoLocalizacao")
+}
+
+model HistoricoAlocacao {
+  id                      Int       @id @default(autoincrement())
+  data                    DateTime
+
+  localizacaoOrigem       Localizacao? @relation(name: "OrigemLocalizacao", fields: [chaveLocalizacaoOrigem], references: [id])
+  chaveLocalizacaoOrigem  Int?
+
+  responsavelOrigem       Usuario?     @relation(name: "OrigemResponsavel", fields: [chaveResponsavelOrigem], references: [id])
+  chaveResponsavelOrigem  String?
+
+  localizacaoDestino      Localizacao? @relation(name: "DestinoLocalizacao", fields: [chaveLocalizacaoDestino], references: [id])
+  chaveLocalizacaoDestino Int?
+
+  responsavelDestino      Usuario?     @relation(name: "DestinoResponsavel", fields: [chaveResponsavelDestino], references: [id])
+  chaveResponsavelDestino String?
+}
