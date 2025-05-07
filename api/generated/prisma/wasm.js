@@ -128,7 +128,7 @@ exports.Prisma.AtivoScalarFieldEnum = {
   status: 'status',
   valor: 'valor',
   dataAquisicao: 'dataAquisicao',
-  descricaoProblema: 'descricaoProblema',
+  observacao: 'observacao',
   qtdReparos: 'qtdReparos',
   chaveResponsavel: 'chaveResponsavel',
   chaveLocalizacao: 'chaveLocalizacao'
@@ -150,11 +150,13 @@ exports.Prisma.CargoScalarFieldEnum = {
 
 exports.Prisma.LocalizacaoScalarFieldEnum = {
   id: 'id',
-  endereco: 'endereco'
+  endereco: 'endereco',
+  descricao: 'descricao'
 };
 
 exports.Prisma.HistoricoAlocacaoScalarFieldEnum = {
   id: 'id',
+  chaveAtivo: 'chaveAtivo',
   data: 'data',
   chaveLocalizacaoOrigem: 'chaveLocalizacaoOrigem',
   chaveResponsavelOrigem: 'chaveResponsavelOrigem',
@@ -177,7 +179,7 @@ exports.Prisma.AtivoOrderByRelevanceFieldEnum = {
   codInterno: 'codInterno',
   descricao: 'descricao',
   status: 'status',
-  descricaoProblema: 'descricaoProblema',
+  observacao: 'observacao',
   chaveResponsavel: 'chaveResponsavel'
 };
 
@@ -194,7 +196,8 @@ exports.Prisma.CargoOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.LocalizacaoOrderByRelevanceFieldEnum = {
-  endereco: 'endereco'
+  endereco: 'endereco',
+  descricao: 'descricao'
 };
 
 exports.Prisma.HistoricoAlocacaoOrderByRelevanceFieldEnum = {

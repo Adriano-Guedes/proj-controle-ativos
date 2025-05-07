@@ -15,15 +15,15 @@ datasource db {
 }
 
 model Ativo {
-  id                Int      @id @default(autoincrement())
-  nome              String   @db.VarChar(100)
-  codInterno        String?  @unique @db.VarChar(50)
-  descricao         String?  @db.Text
-  status            String   @db.VarChar(50)
-  valor             Decimal  @db.Decimal(10, 2)
-  dataAquisicao     DateTime
-  descricaoProblema String?  @db.Text
-  qtdReparos        Int
+  id            Int      @id @default(autoincrement())
+  nome          String   @db.VarChar(100)
+  codInterno    String?  @unique @db.VarChar(50)
+  descricao     String?  @db.Text
+  status        String   @db.VarChar(50)
+  valor         Decimal  @db.Decimal(10, 2)
+  dataAquisicao DateTime
+  observacao    String?  @db.Text
+  qtdReparos    Int
 
   responsavel      Usuario? @relation(fields: [chaveResponsavel], references: [id])
   chaveResponsavel String?
@@ -55,8 +55,9 @@ model Cargo {
 }
 
 model Localizacao {
-  id       Int    @id @default(autoincrement())
-  endereco String @unique @db.VarChar(255)
+  id        Int     @id @default(autoincrement())
+  endereco  String  @unique @db.VarChar(255)
+  descricao String? @db.Text
 
   ativos            Ativo[]
   historicosOrigem  HistoricoAlocacao[] @relation(name: "OrigemLocalizacao")
@@ -64,8 +65,9 @@ model Localizacao {
 }
 
 model HistoricoAlocacao {
-  id   Int      @id @default(autoincrement())
-  data DateTime
+  id         Int      @id @default(autoincrement())
+  chaveAtivo Int
+  data       DateTime
 
   localizacaoOrigem      Localizacao? @relation(name: "OrigemLocalizacao", fields: [chaveLocalizacaoOrigem], references: [id])
   chaveLocalizacaoOrigem Int?

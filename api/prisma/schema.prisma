@@ -22,7 +22,7 @@ model Ativo {
   status            String    @db.VarChar(50)
   valor             Decimal   @db.Decimal(10, 2)
   dataAquisicao     DateTime
-  descricaoProblema String?   @db.Text
+  observacao        String?   @db.Text
   qtdReparos        Int
 
   responsavel       Usuario?   @relation(fields: [chaveResponsavel], references: [id])
@@ -57,6 +57,7 @@ model Cargo {
 model Localizacao {
   id          Int     @id @default(autoincrement())
   endereco    String  @unique @db.VarChar(255)
+  descricao         String?   @db.Text
 
   ativos      Ativo[]
   historicosOrigem     HistoricoAlocacao[] @relation(name: "OrigemLocalizacao")
@@ -65,6 +66,7 @@ model Localizacao {
 
 model HistoricoAlocacao {
   id                      Int       @id @default(autoincrement())
+  chaveAtivo              Int
   data                    DateTime
 
   localizacaoOrigem       Localizacao? @relation(name: "OrigemLocalizacao", fields: [chaveLocalizacaoOrigem], references: [id])

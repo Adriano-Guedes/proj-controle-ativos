@@ -1355,7 +1355,7 @@ export namespace Prisma {
     status: string | null
     valor: Decimal | null
     dataAquisicao: Date | null
-    descricaoProblema: string | null
+    observacao: string | null
     qtdReparos: number | null
     chaveResponsavel: string | null
     chaveLocalizacao: number | null
@@ -1369,7 +1369,7 @@ export namespace Prisma {
     status: string | null
     valor: Decimal | null
     dataAquisicao: Date | null
-    descricaoProblema: string | null
+    observacao: string | null
     qtdReparos: number | null
     chaveResponsavel: string | null
     chaveLocalizacao: number | null
@@ -1383,7 +1383,7 @@ export namespace Prisma {
     status: number
     valor: number
     dataAquisicao: number
-    descricaoProblema: number
+    observacao: number
     qtdReparos: number
     chaveResponsavel: number
     chaveLocalizacao: number
@@ -1413,7 +1413,7 @@ export namespace Prisma {
     status?: true
     valor?: true
     dataAquisicao?: true
-    descricaoProblema?: true
+    observacao?: true
     qtdReparos?: true
     chaveResponsavel?: true
     chaveLocalizacao?: true
@@ -1427,7 +1427,7 @@ export namespace Prisma {
     status?: true
     valor?: true
     dataAquisicao?: true
-    descricaoProblema?: true
+    observacao?: true
     qtdReparos?: true
     chaveResponsavel?: true
     chaveLocalizacao?: true
@@ -1441,7 +1441,7 @@ export namespace Prisma {
     status?: true
     valor?: true
     dataAquisicao?: true
-    descricaoProblema?: true
+    observacao?: true
     qtdReparos?: true
     chaveResponsavel?: true
     chaveLocalizacao?: true
@@ -1542,7 +1542,7 @@ export namespace Prisma {
     status: string
     valor: Decimal
     dataAquisicao: Date
-    descricaoProblema: string | null
+    observacao: string | null
     qtdReparos: number
     chaveResponsavel: string | null
     chaveLocalizacao: number | null
@@ -1575,7 +1575,7 @@ export namespace Prisma {
     status?: boolean
     valor?: boolean
     dataAquisicao?: boolean
-    descricaoProblema?: boolean
+    observacao?: boolean
     qtdReparos?: boolean
     chaveResponsavel?: boolean
     chaveLocalizacao?: boolean
@@ -1593,13 +1593,13 @@ export namespace Prisma {
     status?: boolean
     valor?: boolean
     dataAquisicao?: boolean
-    descricaoProblema?: boolean
+    observacao?: boolean
     qtdReparos?: boolean
     chaveResponsavel?: boolean
     chaveLocalizacao?: boolean
   }
 
-  export type AtivoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codInterno" | "descricao" | "status" | "valor" | "dataAquisicao" | "descricaoProblema" | "qtdReparos" | "chaveResponsavel" | "chaveLocalizacao", ExtArgs["result"]["ativo"]>
+  export type AtivoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "codInterno" | "descricao" | "status" | "valor" | "dataAquisicao" | "observacao" | "qtdReparos" | "chaveResponsavel" | "chaveLocalizacao", ExtArgs["result"]["ativo"]>
   export type AtivoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     responsavel?: boolean | Ativo$responsavelArgs<ExtArgs>
     localizacao?: boolean | Ativo$localizacaoArgs<ExtArgs>
@@ -1619,7 +1619,7 @@ export namespace Prisma {
       status: string
       valor: Prisma.Decimal
       dataAquisicao: Date
-      descricaoProblema: string | null
+      observacao: string | null
       qtdReparos: number
       chaveResponsavel: string | null
       chaveLocalizacao: number | null
@@ -2001,7 +2001,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Ativo", 'String'>
     readonly valor: FieldRef<"Ativo", 'Decimal'>
     readonly dataAquisicao: FieldRef<"Ativo", 'DateTime'>
-    readonly descricaoProblema: FieldRef<"Ativo", 'String'>
+    readonly observacao: FieldRef<"Ativo", 'String'>
     readonly qtdReparos: FieldRef<"Ativo", 'Int'>
     readonly chaveResponsavel: FieldRef<"Ativo", 'String'>
     readonly chaveLocalizacao: FieldRef<"Ativo", 'Int'>
@@ -4462,16 +4462,19 @@ export namespace Prisma {
   export type LocalizacaoMinAggregateOutputType = {
     id: number | null
     endereco: string | null
+    descricao: string | null
   }
 
   export type LocalizacaoMaxAggregateOutputType = {
     id: number | null
     endereco: string | null
+    descricao: string | null
   }
 
   export type LocalizacaoCountAggregateOutputType = {
     id: number
     endereco: number
+    descricao: number
     _all: number
   }
 
@@ -4487,16 +4490,19 @@ export namespace Prisma {
   export type LocalizacaoMinAggregateInputType = {
     id?: true
     endereco?: true
+    descricao?: true
   }
 
   export type LocalizacaoMaxAggregateInputType = {
     id?: true
     endereco?: true
+    descricao?: true
   }
 
   export type LocalizacaoCountAggregateInputType = {
     id?: true
     endereco?: true
+    descricao?: true
     _all?: true
   }
 
@@ -4589,6 +4595,7 @@ export namespace Prisma {
   export type LocalizacaoGroupByOutputType = {
     id: number
     endereco: string
+    descricao: string | null
     _count: LocalizacaoCountAggregateOutputType | null
     _avg: LocalizacaoAvgAggregateOutputType | null
     _sum: LocalizacaoSumAggregateOutputType | null
@@ -4613,6 +4620,7 @@ export namespace Prisma {
   export type LocalizacaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     endereco?: boolean
+    descricao?: boolean
     ativos?: boolean | Localizacao$ativosArgs<ExtArgs>
     historicosOrigem?: boolean | Localizacao$historicosOrigemArgs<ExtArgs>
     historicosDestino?: boolean | Localizacao$historicosDestinoArgs<ExtArgs>
@@ -4624,9 +4632,10 @@ export namespace Prisma {
   export type LocalizacaoSelectScalar = {
     id?: boolean
     endereco?: boolean
+    descricao?: boolean
   }
 
-  export type LocalizacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "endereco", ExtArgs["result"]["localizacao"]>
+  export type LocalizacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "endereco" | "descricao", ExtArgs["result"]["localizacao"]>
   export type LocalizacaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ativos?: boolean | Localizacao$ativosArgs<ExtArgs>
     historicosOrigem?: boolean | Localizacao$historicosOrigemArgs<ExtArgs>
@@ -4644,6 +4653,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       endereco: string
+      descricao: string | null
     }, ExtArgs["result"]["localizacao"]>
     composites: {}
   }
@@ -5018,6 +5028,7 @@ export namespace Prisma {
   interface LocalizacaoFieldRefs {
     readonly id: FieldRef<"Localizacao", 'Int'>
     readonly endereco: FieldRef<"Localizacao", 'String'>
+    readonly descricao: FieldRef<"Localizacao", 'String'>
   }
     
 
@@ -5465,18 +5476,21 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoAvgAggregateOutputType = {
     id: number | null
+    chaveAtivo: number | null
     chaveLocalizacaoOrigem: number | null
     chaveLocalizacaoDestino: number | null
   }
 
   export type HistoricoAlocacaoSumAggregateOutputType = {
     id: number | null
+    chaveAtivo: number | null
     chaveLocalizacaoOrigem: number | null
     chaveLocalizacaoDestino: number | null
   }
 
   export type HistoricoAlocacaoMinAggregateOutputType = {
     id: number | null
+    chaveAtivo: number | null
     data: Date | null
     chaveLocalizacaoOrigem: number | null
     chaveResponsavelOrigem: string | null
@@ -5486,6 +5500,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMaxAggregateOutputType = {
     id: number | null
+    chaveAtivo: number | null
     data: Date | null
     chaveLocalizacaoOrigem: number | null
     chaveResponsavelOrigem: string | null
@@ -5495,6 +5510,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCountAggregateOutputType = {
     id: number
+    chaveAtivo: number
     data: number
     chaveLocalizacaoOrigem: number
     chaveResponsavelOrigem: number
@@ -5506,18 +5522,21 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoAvgAggregateInputType = {
     id?: true
+    chaveAtivo?: true
     chaveLocalizacaoOrigem?: true
     chaveLocalizacaoDestino?: true
   }
 
   export type HistoricoAlocacaoSumAggregateInputType = {
     id?: true
+    chaveAtivo?: true
     chaveLocalizacaoOrigem?: true
     chaveLocalizacaoDestino?: true
   }
 
   export type HistoricoAlocacaoMinAggregateInputType = {
     id?: true
+    chaveAtivo?: true
     data?: true
     chaveLocalizacaoOrigem?: true
     chaveResponsavelOrigem?: true
@@ -5527,6 +5546,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMaxAggregateInputType = {
     id?: true
+    chaveAtivo?: true
     data?: true
     chaveLocalizacaoOrigem?: true
     chaveResponsavelOrigem?: true
@@ -5536,6 +5556,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCountAggregateInputType = {
     id?: true
+    chaveAtivo?: true
     data?: true
     chaveLocalizacaoOrigem?: true
     chaveResponsavelOrigem?: true
@@ -5632,6 +5653,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoGroupByOutputType = {
     id: number
+    chaveAtivo: number
     data: Date
     chaveLocalizacaoOrigem: number | null
     chaveResponsavelOrigem: string | null
@@ -5660,6 +5682,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    chaveAtivo?: boolean
     data?: boolean
     chaveLocalizacaoOrigem?: boolean
     chaveResponsavelOrigem?: boolean
@@ -5675,6 +5698,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoSelectScalar = {
     id?: boolean
+    chaveAtivo?: boolean
     data?: boolean
     chaveLocalizacaoOrigem?: boolean
     chaveResponsavelOrigem?: boolean
@@ -5682,7 +5706,7 @@ export namespace Prisma {
     chaveResponsavelDestino?: boolean
   }
 
-  export type HistoricoAlocacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "data" | "chaveLocalizacaoOrigem" | "chaveResponsavelOrigem" | "chaveLocalizacaoDestino" | "chaveResponsavelDestino", ExtArgs["result"]["historicoAlocacao"]>
+  export type HistoricoAlocacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chaveAtivo" | "data" | "chaveLocalizacaoOrigem" | "chaveResponsavelOrigem" | "chaveLocalizacaoDestino" | "chaveResponsavelDestino", ExtArgs["result"]["historicoAlocacao"]>
   export type HistoricoAlocacaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     localizacaoOrigem?: boolean | HistoricoAlocacao$localizacaoOrigemArgs<ExtArgs>
     responsavelOrigem?: boolean | HistoricoAlocacao$responsavelOrigemArgs<ExtArgs>
@@ -5700,6 +5724,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      chaveAtivo: number
       data: Date
       chaveLocalizacaoOrigem: number | null
       chaveResponsavelOrigem: string | null
@@ -6079,6 +6104,7 @@ export namespace Prisma {
    */
   interface HistoricoAlocacaoFieldRefs {
     readonly id: FieldRef<"HistoricoAlocacao", 'Int'>
+    readonly chaveAtivo: FieldRef<"HistoricoAlocacao", 'Int'>
     readonly data: FieldRef<"HistoricoAlocacao", 'DateTime'>
     readonly chaveLocalizacaoOrigem: FieldRef<"HistoricoAlocacao", 'Int'>
     readonly chaveResponsavelOrigem: FieldRef<"HistoricoAlocacao", 'String'>
@@ -6543,7 +6569,7 @@ export namespace Prisma {
     status: 'status',
     valor: 'valor',
     dataAquisicao: 'dataAquisicao',
-    descricaoProblema: 'descricaoProblema',
+    observacao: 'observacao',
     qtdReparos: 'qtdReparos',
     chaveResponsavel: 'chaveResponsavel',
     chaveLocalizacao: 'chaveLocalizacao'
@@ -6574,7 +6600,8 @@ export namespace Prisma {
 
   export const LocalizacaoScalarFieldEnum: {
     id: 'id',
-    endereco: 'endereco'
+    endereco: 'endereco',
+    descricao: 'descricao'
   };
 
   export type LocalizacaoScalarFieldEnum = (typeof LocalizacaoScalarFieldEnum)[keyof typeof LocalizacaoScalarFieldEnum]
@@ -6582,6 +6609,7 @@ export namespace Prisma {
 
   export const HistoricoAlocacaoScalarFieldEnum: {
     id: 'id',
+    chaveAtivo: 'chaveAtivo',
     data: 'data',
     chaveLocalizacaoOrigem: 'chaveLocalizacaoOrigem',
     chaveResponsavelOrigem: 'chaveResponsavelOrigem',
@@ -6613,7 +6641,7 @@ export namespace Prisma {
     codInterno: 'codInterno',
     descricao: 'descricao',
     status: 'status',
-    descricaoProblema: 'descricaoProblema',
+    observacao: 'observacao',
     chaveResponsavel: 'chaveResponsavel'
   };
 
@@ -6639,7 +6667,8 @@ export namespace Prisma {
 
 
   export const LocalizacaoOrderByRelevanceFieldEnum: {
-    endereco: 'endereco'
+    endereco: 'endereco',
+    descricao: 'descricao'
   };
 
   export type LocalizacaoOrderByRelevanceFieldEnum = (typeof LocalizacaoOrderByRelevanceFieldEnum)[keyof typeof LocalizacaoOrderByRelevanceFieldEnum]
@@ -6707,7 +6736,7 @@ export namespace Prisma {
     status?: StringFilter<"Ativo"> | string
     valor?: DecimalFilter<"Ativo"> | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFilter<"Ativo"> | Date | string
-    descricaoProblema?: StringNullableFilter<"Ativo"> | string | null
+    observacao?: StringNullableFilter<"Ativo"> | string | null
     qtdReparos?: IntFilter<"Ativo"> | number
     chaveResponsavel?: StringNullableFilter<"Ativo"> | string | null
     chaveLocalizacao?: IntNullableFilter<"Ativo"> | number | null
@@ -6723,7 +6752,7 @@ export namespace Prisma {
     status?: SortOrder
     valor?: SortOrder
     dataAquisicao?: SortOrder
-    descricaoProblema?: SortOrderInput | SortOrder
+    observacao?: SortOrderInput | SortOrder
     qtdReparos?: SortOrder
     chaveResponsavel?: SortOrderInput | SortOrder
     chaveLocalizacao?: SortOrderInput | SortOrder
@@ -6743,7 +6772,7 @@ export namespace Prisma {
     status?: StringFilter<"Ativo"> | string
     valor?: DecimalFilter<"Ativo"> | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFilter<"Ativo"> | Date | string
-    descricaoProblema?: StringNullableFilter<"Ativo"> | string | null
+    observacao?: StringNullableFilter<"Ativo"> | string | null
     qtdReparos?: IntFilter<"Ativo"> | number
     chaveResponsavel?: StringNullableFilter<"Ativo"> | string | null
     chaveLocalizacao?: IntNullableFilter<"Ativo"> | number | null
@@ -6759,7 +6788,7 @@ export namespace Prisma {
     status?: SortOrder
     valor?: SortOrder
     dataAquisicao?: SortOrder
-    descricaoProblema?: SortOrderInput | SortOrder
+    observacao?: SortOrderInput | SortOrder
     qtdReparos?: SortOrder
     chaveResponsavel?: SortOrderInput | SortOrder
     chaveLocalizacao?: SortOrderInput | SortOrder
@@ -6781,7 +6810,7 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"Ativo"> | string
     valor?: DecimalWithAggregatesFilter<"Ativo"> | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeWithAggregatesFilter<"Ativo"> | Date | string
-    descricaoProblema?: StringNullableWithAggregatesFilter<"Ativo"> | string | null
+    observacao?: StringNullableWithAggregatesFilter<"Ativo"> | string | null
     qtdReparos?: IntWithAggregatesFilter<"Ativo"> | number
     chaveResponsavel?: StringNullableWithAggregatesFilter<"Ativo"> | string | null
     chaveLocalizacao?: IntNullableWithAggregatesFilter<"Ativo"> | number | null
@@ -6908,6 +6937,7 @@ export namespace Prisma {
     NOT?: LocalizacaoWhereInput | LocalizacaoWhereInput[]
     id?: IntFilter<"Localizacao"> | number
     endereco?: StringFilter<"Localizacao"> | string
+    descricao?: StringNullableFilter<"Localizacao"> | string | null
     ativos?: AtivoListRelationFilter
     historicosOrigem?: HistoricoAlocacaoListRelationFilter
     historicosDestino?: HistoricoAlocacaoListRelationFilter
@@ -6916,6 +6946,7 @@ export namespace Prisma {
   export type LocalizacaoOrderByWithRelationInput = {
     id?: SortOrder
     endereco?: SortOrder
+    descricao?: SortOrderInput | SortOrder
     ativos?: AtivoOrderByRelationAggregateInput
     historicosOrigem?: HistoricoAlocacaoOrderByRelationAggregateInput
     historicosDestino?: HistoricoAlocacaoOrderByRelationAggregateInput
@@ -6928,6 +6959,7 @@ export namespace Prisma {
     AND?: LocalizacaoWhereInput | LocalizacaoWhereInput[]
     OR?: LocalizacaoWhereInput[]
     NOT?: LocalizacaoWhereInput | LocalizacaoWhereInput[]
+    descricao?: StringNullableFilter<"Localizacao"> | string | null
     ativos?: AtivoListRelationFilter
     historicosOrigem?: HistoricoAlocacaoListRelationFilter
     historicosDestino?: HistoricoAlocacaoListRelationFilter
@@ -6936,6 +6968,7 @@ export namespace Prisma {
   export type LocalizacaoOrderByWithAggregationInput = {
     id?: SortOrder
     endereco?: SortOrder
+    descricao?: SortOrderInput | SortOrder
     _count?: LocalizacaoCountOrderByAggregateInput
     _avg?: LocalizacaoAvgOrderByAggregateInput
     _max?: LocalizacaoMaxOrderByAggregateInput
@@ -6949,6 +6982,7 @@ export namespace Prisma {
     NOT?: LocalizacaoScalarWhereWithAggregatesInput | LocalizacaoScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Localizacao"> | number
     endereco?: StringWithAggregatesFilter<"Localizacao"> | string
+    descricao?: StringNullableWithAggregatesFilter<"Localizacao"> | string | null
   }
 
   export type HistoricoAlocacaoWhereInput = {
@@ -6956,6 +6990,7 @@ export namespace Prisma {
     OR?: HistoricoAlocacaoWhereInput[]
     NOT?: HistoricoAlocacaoWhereInput | HistoricoAlocacaoWhereInput[]
     id?: IntFilter<"HistoricoAlocacao"> | number
+    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
     data?: DateTimeFilter<"HistoricoAlocacao"> | Date | string
     chaveLocalizacaoOrigem?: IntNullableFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelOrigem?: StringNullableFilter<"HistoricoAlocacao"> | string | null
@@ -6969,6 +7004,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoOrderByWithRelationInput = {
     id?: SortOrder
+    chaveAtivo?: SortOrder
     data?: SortOrder
     chaveLocalizacaoOrigem?: SortOrderInput | SortOrder
     chaveResponsavelOrigem?: SortOrderInput | SortOrder
@@ -6986,6 +7022,7 @@ export namespace Prisma {
     AND?: HistoricoAlocacaoWhereInput | HistoricoAlocacaoWhereInput[]
     OR?: HistoricoAlocacaoWhereInput[]
     NOT?: HistoricoAlocacaoWhereInput | HistoricoAlocacaoWhereInput[]
+    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
     data?: DateTimeFilter<"HistoricoAlocacao"> | Date | string
     chaveLocalizacaoOrigem?: IntNullableFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelOrigem?: StringNullableFilter<"HistoricoAlocacao"> | string | null
@@ -6999,6 +7036,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoOrderByWithAggregationInput = {
     id?: SortOrder
+    chaveAtivo?: SortOrder
     data?: SortOrder
     chaveLocalizacaoOrigem?: SortOrderInput | SortOrder
     chaveResponsavelOrigem?: SortOrderInput | SortOrder
@@ -7016,6 +7054,7 @@ export namespace Prisma {
     OR?: HistoricoAlocacaoScalarWhereWithAggregatesInput[]
     NOT?: HistoricoAlocacaoScalarWhereWithAggregatesInput | HistoricoAlocacaoScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"HistoricoAlocacao"> | number
+    chaveAtivo?: IntWithAggregatesFilter<"HistoricoAlocacao"> | number
     data?: DateTimeWithAggregatesFilter<"HistoricoAlocacao"> | Date | string
     chaveLocalizacaoOrigem?: IntNullableWithAggregatesFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelOrigem?: StringNullableWithAggregatesFilter<"HistoricoAlocacao"> | string | null
@@ -7030,7 +7069,7 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     responsavel?: UsuarioCreateNestedOneWithoutAtivosInput
     localizacao?: LocalizacaoCreateNestedOneWithoutAtivosInput
@@ -7044,7 +7083,7 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     chaveResponsavel?: string | null
     chaveLocalizacao?: number | null
@@ -7057,7 +7096,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     responsavel?: UsuarioUpdateOneWithoutAtivosNestedInput
     localizacao?: LocalizacaoUpdateOneWithoutAtivosNestedInput
@@ -7071,7 +7110,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     chaveResponsavel?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacao?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7085,7 +7124,7 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     chaveResponsavel?: string | null
     chaveLocalizacao?: number | null
@@ -7098,7 +7137,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
   }
 
@@ -7110,7 +7149,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     chaveResponsavel?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacao?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7228,6 +7267,7 @@ export namespace Prisma {
 
   export type LocalizacaoCreateInput = {
     endereco: string
+    descricao?: string | null
     ativos?: AtivoCreateNestedManyWithoutLocalizacaoInput
     historicosOrigem?: HistoricoAlocacaoCreateNestedManyWithoutLocalizacaoOrigemInput
     historicosDestino?: HistoricoAlocacaoCreateNestedManyWithoutLocalizacaoDestinoInput
@@ -7236,6 +7276,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedCreateInput = {
     id?: number
     endereco: string
+    descricao?: string | null
     ativos?: AtivoUncheckedCreateNestedManyWithoutLocalizacaoInput
     historicosOrigem?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutLocalizacaoOrigemInput
     historicosDestino?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutLocalizacaoDestinoInput
@@ -7243,6 +7284,7 @@ export namespace Prisma {
 
   export type LocalizacaoUpdateInput = {
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ativos?: AtivoUpdateManyWithoutLocalizacaoNestedInput
     historicosOrigem?: HistoricoAlocacaoUpdateManyWithoutLocalizacaoOrigemNestedInput
     historicosDestino?: HistoricoAlocacaoUpdateManyWithoutLocalizacaoDestinoNestedInput
@@ -7251,6 +7293,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ativos?: AtivoUncheckedUpdateManyWithoutLocalizacaoNestedInput
     historicosOrigem?: HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoOrigemNestedInput
     historicosDestino?: HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoDestinoNestedInput
@@ -7259,18 +7302,22 @@ export namespace Prisma {
   export type LocalizacaoCreateManyInput = {
     id?: number
     endereco: string
+    descricao?: string | null
   }
 
   export type LocalizacaoUpdateManyMutationInput = {
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LocalizacaoUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HistoricoAlocacaoCreateInput = {
+    chaveAtivo: number
     data: Date | string
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
@@ -7280,6 +7327,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
@@ -7288,6 +7336,7 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateInput = {
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
@@ -7297,6 +7346,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7306,6 +7356,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
@@ -7314,11 +7365,13 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateManyMutationInput = {
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoricoAlocacaoUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7429,7 +7482,7 @@ export namespace Prisma {
     status?: SortOrder
     valor?: SortOrder
     dataAquisicao?: SortOrder
-    descricaoProblema?: SortOrder
+    observacao?: SortOrder
     qtdReparos?: SortOrder
     chaveResponsavel?: SortOrder
     chaveLocalizacao?: SortOrder
@@ -7450,7 +7503,7 @@ export namespace Prisma {
     status?: SortOrder
     valor?: SortOrder
     dataAquisicao?: SortOrder
-    descricaoProblema?: SortOrder
+    observacao?: SortOrder
     qtdReparos?: SortOrder
     chaveResponsavel?: SortOrder
     chaveLocalizacao?: SortOrder
@@ -7464,7 +7517,7 @@ export namespace Prisma {
     status?: SortOrder
     valor?: SortOrder
     dataAquisicao?: SortOrder
-    descricaoProblema?: SortOrder
+    observacao?: SortOrder
     qtdReparos?: SortOrder
     chaveResponsavel?: SortOrder
     chaveLocalizacao?: SortOrder
@@ -7689,6 +7742,7 @@ export namespace Prisma {
   export type LocalizacaoCountOrderByAggregateInput = {
     id?: SortOrder
     endereco?: SortOrder
+    descricao?: SortOrder
   }
 
   export type LocalizacaoAvgOrderByAggregateInput = {
@@ -7698,11 +7752,13 @@ export namespace Prisma {
   export type LocalizacaoMaxOrderByAggregateInput = {
     id?: SortOrder
     endereco?: SortOrder
+    descricao?: SortOrder
   }
 
   export type LocalizacaoMinOrderByAggregateInput = {
     id?: SortOrder
     endereco?: SortOrder
+    descricao?: SortOrder
   }
 
   export type LocalizacaoSumOrderByAggregateInput = {
@@ -7717,6 +7773,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCountOrderByAggregateInput = {
     id?: SortOrder
+    chaveAtivo?: SortOrder
     data?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveResponsavelOrigem?: SortOrder
@@ -7726,12 +7783,14 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoAvgOrderByAggregateInput = {
     id?: SortOrder
+    chaveAtivo?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveLocalizacaoDestino?: SortOrder
   }
 
   export type HistoricoAlocacaoMaxOrderByAggregateInput = {
     id?: SortOrder
+    chaveAtivo?: SortOrder
     data?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveResponsavelOrigem?: SortOrder
@@ -7741,6 +7800,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMinOrderByAggregateInput = {
     id?: SortOrder
+    chaveAtivo?: SortOrder
     data?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveResponsavelOrigem?: SortOrder
@@ -7750,6 +7810,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoSumOrderByAggregateInput = {
     id?: SortOrder
+    chaveAtivo?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveLocalizacaoDestino?: SortOrder
   }
@@ -8419,6 +8480,7 @@ export namespace Prisma {
 
   export type LocalizacaoCreateWithoutAtivosInput = {
     endereco: string
+    descricao?: string | null
     historicosOrigem?: HistoricoAlocacaoCreateNestedManyWithoutLocalizacaoOrigemInput
     historicosDestino?: HistoricoAlocacaoCreateNestedManyWithoutLocalizacaoDestinoInput
   }
@@ -8426,6 +8488,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedCreateWithoutAtivosInput = {
     id?: number
     endereco: string
+    descricao?: string | null
     historicosOrigem?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutLocalizacaoOrigemInput
     historicosDestino?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutLocalizacaoDestinoInput
   }
@@ -8481,6 +8544,7 @@ export namespace Prisma {
 
   export type LocalizacaoUpdateWithoutAtivosInput = {
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     historicosOrigem?: HistoricoAlocacaoUpdateManyWithoutLocalizacaoOrigemNestedInput
     historicosDestino?: HistoricoAlocacaoUpdateManyWithoutLocalizacaoDestinoNestedInput
   }
@@ -8488,6 +8552,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedUpdateWithoutAtivosInput = {
     id?: IntFieldUpdateOperationsInput | number
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     historicosOrigem?: HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoOrigemNestedInput
     historicosDestino?: HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoDestinoNestedInput
   }
@@ -8513,7 +8578,7 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     localizacao?: LocalizacaoCreateNestedOneWithoutAtivosInput
   }
@@ -8526,7 +8591,7 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     chaveLocalizacao?: number | null
   }
@@ -8542,6 +8607,7 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutResponsavelOrigemInput = {
+    chaveAtivo: number
     data: Date | string
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     localizacaoDestino?: LocalizacaoCreateNestedOneWithoutHistoricosDestinoInput
@@ -8550,6 +8616,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutResponsavelOrigemInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveLocalizacaoDestino?: number | null
@@ -8567,6 +8634,7 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutResponsavelDestinoInput = {
+    chaveAtivo: number
     data: Date | string
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
@@ -8575,6 +8643,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutResponsavelDestinoInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
@@ -8638,7 +8707,7 @@ export namespace Prisma {
     status?: StringFilter<"Ativo"> | string
     valor?: DecimalFilter<"Ativo"> | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFilter<"Ativo"> | Date | string
-    descricaoProblema?: StringNullableFilter<"Ativo"> | string | null
+    observacao?: StringNullableFilter<"Ativo"> | string | null
     qtdReparos?: IntFilter<"Ativo"> | number
     chaveResponsavel?: StringNullableFilter<"Ativo"> | string | null
     chaveLocalizacao?: IntNullableFilter<"Ativo"> | number | null
@@ -8665,6 +8734,7 @@ export namespace Prisma {
     OR?: HistoricoAlocacaoScalarWhereInput[]
     NOT?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
     id?: IntFilter<"HistoricoAlocacao"> | number
+    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
     data?: DateTimeFilter<"HistoricoAlocacao"> | Date | string
     chaveLocalizacaoOrigem?: IntNullableFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelOrigem?: StringNullableFilter<"HistoricoAlocacao"> | string | null
@@ -8755,7 +8825,7 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     responsavel?: UsuarioCreateNestedOneWithoutAtivosInput
   }
@@ -8768,7 +8838,7 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     chaveResponsavel?: string | null
   }
@@ -8784,6 +8854,7 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutLocalizacaoOrigemInput = {
+    chaveAtivo: number
     data: Date | string
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
     localizacaoDestino?: LocalizacaoCreateNestedOneWithoutHistoricosDestinoInput
@@ -8792,6 +8863,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutLocalizacaoOrigemInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
@@ -8809,6 +8881,7 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutLocalizacaoDestinoInput = {
+    chaveAtivo: number
     data: Date | string
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
@@ -8817,6 +8890,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutLocalizacaoDestinoInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
@@ -8883,6 +8957,7 @@ export namespace Prisma {
 
   export type LocalizacaoCreateWithoutHistoricosOrigemInput = {
     endereco: string
+    descricao?: string | null
     ativos?: AtivoCreateNestedManyWithoutLocalizacaoInput
     historicosDestino?: HistoricoAlocacaoCreateNestedManyWithoutLocalizacaoDestinoInput
   }
@@ -8890,6 +8965,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedCreateWithoutHistoricosOrigemInput = {
     id?: number
     endereco: string
+    descricao?: string | null
     ativos?: AtivoUncheckedCreateNestedManyWithoutLocalizacaoInput
     historicosDestino?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutLocalizacaoDestinoInput
   }
@@ -8928,6 +9004,7 @@ export namespace Prisma {
 
   export type LocalizacaoCreateWithoutHistoricosDestinoInput = {
     endereco: string
+    descricao?: string | null
     ativos?: AtivoCreateNestedManyWithoutLocalizacaoInput
     historicosOrigem?: HistoricoAlocacaoCreateNestedManyWithoutLocalizacaoOrigemInput
   }
@@ -8935,6 +9012,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedCreateWithoutHistoricosDestinoInput = {
     id?: number
     endereco: string
+    descricao?: string | null
     ativos?: AtivoUncheckedCreateNestedManyWithoutLocalizacaoInput
     historicosOrigem?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutLocalizacaoOrigemInput
   }
@@ -8984,6 +9062,7 @@ export namespace Prisma {
 
   export type LocalizacaoUpdateWithoutHistoricosOrigemInput = {
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ativos?: AtivoUpdateManyWithoutLocalizacaoNestedInput
     historicosDestino?: HistoricoAlocacaoUpdateManyWithoutLocalizacaoDestinoNestedInput
   }
@@ -8991,6 +9070,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedUpdateWithoutHistoricosOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ativos?: AtivoUncheckedUpdateManyWithoutLocalizacaoNestedInput
     historicosDestino?: HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoDestinoNestedInput
   }
@@ -9041,6 +9121,7 @@ export namespace Prisma {
 
   export type LocalizacaoUpdateWithoutHistoricosDestinoInput = {
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ativos?: AtivoUpdateManyWithoutLocalizacaoNestedInput
     historicosOrigem?: HistoricoAlocacaoUpdateManyWithoutLocalizacaoOrigemNestedInput
   }
@@ -9048,6 +9129,7 @@ export namespace Prisma {
   export type LocalizacaoUncheckedUpdateWithoutHistoricosDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
     endereco?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
     ativos?: AtivoUncheckedUpdateManyWithoutLocalizacaoNestedInput
     historicosOrigem?: HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoOrigemNestedInput
   }
@@ -9093,13 +9175,14 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     chaveLocalizacao?: number | null
   }
 
   export type HistoricoAlocacaoCreateManyResponsavelOrigemInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveLocalizacaoDestino?: number | null
@@ -9108,6 +9191,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyResponsavelDestinoInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
@@ -9121,7 +9205,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     localizacao?: LocalizacaoUpdateOneWithoutAtivosNestedInput
   }
@@ -9134,7 +9218,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     chaveLocalizacao?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -9147,12 +9231,13 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     chaveLocalizacao?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type HistoricoAlocacaoUpdateWithoutResponsavelOrigemInput = {
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     localizacaoDestino?: LocalizacaoUpdateOneWithoutHistoricosDestinoNestedInput
@@ -9161,6 +9246,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutResponsavelOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9169,6 +9255,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutResponsavelOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9176,6 +9263,7 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateWithoutResponsavelDestinoInput = {
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
@@ -9184,6 +9272,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutResponsavelDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9192,6 +9281,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutResponsavelDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9244,13 +9334,14 @@ export namespace Prisma {
     status: string
     valor: Decimal | DecimalJsLike | number | string
     dataAquisicao: Date | string
-    descricaoProblema?: string | null
+    observacao?: string | null
     qtdReparos: number
     chaveResponsavel?: string | null
   }
 
   export type HistoricoAlocacaoCreateManyLocalizacaoOrigemInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
@@ -9259,6 +9350,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyLocalizacaoDestinoInput = {
     id?: number
+    chaveAtivo: number
     data: Date | string
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
@@ -9272,7 +9364,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     responsavel?: UsuarioUpdateOneWithoutAtivosNestedInput
   }
@@ -9285,7 +9377,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     chaveResponsavel?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -9298,12 +9390,13 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
-    descricaoProblema?: NullableStringFieldUpdateOperationsInput | string | null
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
     qtdReparos?: IntFieldUpdateOperationsInput | number
     chaveResponsavel?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HistoricoAlocacaoUpdateWithoutLocalizacaoOrigemInput = {
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
     localizacaoDestino?: LocalizacaoUpdateOneWithoutHistoricosDestinoNestedInput
@@ -9312,6 +9405,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutLocalizacaoOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9320,6 +9414,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9327,6 +9422,7 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateWithoutLocalizacaoDestinoInput = {
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
@@ -9335,6 +9431,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutLocalizacaoDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9343,6 +9440,7 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
