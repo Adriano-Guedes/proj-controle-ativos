@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getAllAtivos, getAtivoById, createAtivo, updateAtivo, deleteAtivo, moveAtivo } from "../controllers/ativo.controller";
+import { getAllAtivos, getAtivoById, createAtivo, updateAtivo, deleteAtivo, moveAtivo } from "./ativo.controller";
 
 const ativoRouter = Router();
 

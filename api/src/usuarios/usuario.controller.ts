@@ -1,8 +1,12 @@
 import { PrismaClient } from "../../generated/prisma";
+import bcrypt from 'bcrypt';
+import { plainToInstance } from "class-transformer";
+import { validate } from "class-validator";
+import { Request, Response } from "express";
+import { CreateUsuarioDto } from "./dto/create-usuario.dto";
 
 const db = new PrismaClient().usuario;
 
-import { Request, Response } from "express";
 
 // Get all usuarios
 export const getAllUsuarios = async (req: Request, res: Response) => {
@@ -10,7 +14,7 @@ export const getAllUsuarios = async (req: Request, res: Response) => {
     const filters: any = {};
 
     if (req.body.nome) {
-      filters.nome = { contains: req.body.nome, mode: 'insensitive' }
+      filters.nome = { contains: req.body.nome, mode: "insensitive" };
     }
 
     if (req.body.email) {
@@ -80,22 +84,34 @@ export const getUsuarioById = async (req: Request, res: Response) => {
 // Create usuario
 export const createUsuario = async (req: Request, res: Response) => {
   try {
-    const { nome, email, login, senha, chaveCargo } = req.body;
+    const newUsuario = plainToInstance(CreateUsuarioDto, req.body);
+    const erros = await validate(newUsuario);
 
-    //validar senha
-    //verificar se n tem nenhum email nem login igual no banco
-    //criptografar a senha
+    if (erros.length > 0) {
+      const mensagens = erros.map(e => Object.values(e.constraints ?? {})).flat();
+      res.status(400).json({ erros: mensagens });
+      return;
+    }
 
-    let novoUsuario = await db.create({
+    const usuarios = await db.findMany({
+      where: { OR: [{ email: newUsuario.email }, { login: newUsuario.login }] },
+    });
+    if (usuarios.length > 0) {
+      res.status(400).json({ mensagem: "Email ou login já existente, tente outro." });
+      return;
+    }
+
+    const hash = await bcrypt.hash(newUsuario.senha, 10);
+
+    const novoUsuario = await db.create({
       data: {
-        nome,
-        email,
-        login,
-        senha,
-        chaveCargo,
+        nome: newUsuario.nome,
+        email: newUsuario.email,
+        login: newUsuario.login,
+        senha: hash,
       },
     });
-
+  
     res.status(201).json({ data: novoUsuario });
   } catch (e) {
     res.status(500).json({ e });
@@ -139,7 +155,6 @@ export const updateUsuario = async (req: Request, res: Response) => {
   }
 };
 
-
 // Delete usuario
 export const deleteUsuario = async (req: Request, res: Response) => {
   try {
@@ -149,7 +164,7 @@ export const deleteUsuario = async (req: Request, res: Response) => {
 
     res.status(200).json({ mensagem: "Usuário deletado com sucesso" });
   } catch (e: any) {
-    if (e.code === 'P2025') {
+    if (e.code === "P2025") {
       res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
     console.error(e);
@@ -157,3 +172,7 @@ export const deleteUsuario = async (req: Request, res: Response) => {
   }
 };
 
+function validarSenha(senha: string): boolean {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
+  return regex.test(senha);
+}

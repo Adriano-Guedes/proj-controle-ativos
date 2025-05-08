@@ -1,14 +1,16 @@
 import { PrismaClient } from "../../generated/prisma";
+import { Request, Response } from "express";
+import { plainToInstance } from "class-transformer";
+import { validate } from "class-validator";
+import { CreateHistoricoAlocacaoDto } from "./dto/create-historicoAlocacao.dto";
 
 const db = new PrismaClient().historicoAlocacao;
-
-import { Request, Response } from "express";
 
 // Get all históricos
 export const getAllHistoricos = async (req: Request, res: Response) => {
   try {
     const chaveResponsavel = req.body.chaveResponsavel;
-    const usuarios = await db.findMany({
+    const historicos = await db.findMany({
       where: {
         chaveAtivo: parseInt(req.body.idAtivo),
         OR: [
@@ -26,7 +28,7 @@ export const getAllHistoricos = async (req: Request, res: Response) => {
         data: "desc",
       },
     });
-    res.status(200).json({ data: usuarios });
+    res.status(200).json({ data: historicos });
   } catch (e) {
     res.status(500).json({ e });
   }

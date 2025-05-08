@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllHistoricos, getHistoricoById } from "../controllers/historicoAlocacao.controller"
+import { getAllHistoricos, getHistoricoById } from "./historicoAlocacao.controller"
 
 const historicoRouter = Router();
 

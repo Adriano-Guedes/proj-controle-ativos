@@ -1,51 +1,60 @@
 import { PrismaClient } from "../../generated/prisma";
+import { Request, Response } from "express";
+import { plainToInstance } from "class-transformer";
+import { validate } from "class-validator";
+import { CreateAtivoDto } from "./dto/create-ativo.dto";
 
 const db = new PrismaClient().ativo;
 const dbHistoricoMovimentacao = new PrismaClient().historicoAlocacao;
 
-import { Request, Response } from "express";
-
 // Get all ativos
 export const getAllAtivos = async (req: Request, res: Response) => {
-    try {
-      const filters: any = {};
-  
-      if (req.query.nome) {
-        filters.nome = { contains: req.query.nome.toString(), mode: 'insensitive' }; // busca sem case sensitive
-      }
-  
-      if (req.query.codInterno) {
-        filters.codInterno = req.query.codInterno.toString();
-      }
-  
-      if (req.query.status) {
-        filters.status = req.query.status.toString();
-      }
-  
-      if (req.query.chaveResponsavel) {
-        filters.chaveResponsavel = parseInt(req.query.chaveResponsavel.toString());
-      }
-  
-      if (req.query.chaveLocalizacao) {
-        filters.chaveLocalizacao = parseInt(req.query.chaveLocalizacao.toString());
-      }
-  
-      const ativos = await db.findMany({
-        where: filters,
-        include: {
-          responsavel: true,
-          localizacao: true,
-        },
-        orderBy: {
-          nome: 'asc',
-        },
-      });
-  
-      res.status(200).json({ data: ativos });
-    } catch (e) {
-      res.status(500).json({ error: e });
+  try {
+    const filters: any = {};
+
+    if (req.query.nome) {
+      filters.nome = {
+        contains: req.query.nome.toString(),
+        mode: "insensitive",
+      }; // busca sem case sensitive
     }
-  };
+
+    if (req.query.codInterno) {
+      filters.codInterno = req.query.codInterno.toString();
+    }
+
+    if (req.query.status) {
+      filters.status = req.query.status.toString();
+    }
+
+    if (req.query.chaveResponsavel) {
+      filters.chaveResponsavel = parseInt(
+        req.query.chaveResponsavel.toString()
+      );
+    }
+
+    if (req.query.chaveLocalizacao) {
+      filters.chaveLocalizacao = parseInt(
+        req.query.chaveLocalizacao.toString()
+      );
+    }
+
+    const ativos = await db.findMany({
+      where: filters,
+      include: {
+        responsavel: true,
+        localizacao: true,
+      },
+      orderBy: {
+        nome: "asc",
+      },
+    });
+
+    res.status(200).json({ data: ativos });
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+};
 
 // Get ativo by id
 export const getAtivoById = async (req: Request, res: Response) => {
@@ -72,31 +81,28 @@ export const getAtivoById = async (req: Request, res: Response) => {
 // Create ativo
 export const createAtivo = async (req: Request, res: Response) => {
   try {
-    const {
-      nome,
-      codInterno,
-      descricao,
-      status,
-      valor,
-      dataAquisicao,
-      observacao,
-      qtdReparos,
-      chaveResponsavel,
-      chaveLocalizacao,
-    } = req.body;
+    const newAtivo = plainToInstance(CreateAtivoDto, req.body);
+    const erros = await validate(newAtivo);
+
+    if (erros.length > 0) {
+      const mensagens = erros
+        .map((e) => Object.values(e.constraints ?? {}))
+        .flat();
+      res.status(400).json({ erros: mensagens });
+      return;
+    }
 
     let novoAtivo = await db.create({
       data: {
-        nome,
-        codInterno,
-        descricao,
-        status,
-        valor,
-        dataAquisicao: new Date(dataAquisicao),
-        observacao,
-        qtdReparos,
-        chaveResponsavel,
-        chaveLocalizacao,
+        nome: newAtivo.nome,
+        codInterno: newAtivo.codInterno,
+        descricao: newAtivo.descricao,
+        status: newAtivo.status,
+        valor: newAtivo.valor,
+        dataAquisicao: new Date(newAtivo.dataAquisicao),
+        observacao: newAtivo.observacao,
+        chaveResponsavel: newAtivo.chaveResponsavel,
+        chaveLocalizacao: newAtivo.chaveLocalizacao,
       },
     });
 
@@ -117,7 +123,6 @@ export const updateAtivo = async (req: Request, res: Response) => {
       valor,
       dataAquisicao,
       observacao,
-      qtdReparos,
     } = req.body;
     await db.update({
       where: {
@@ -131,7 +136,6 @@ export const updateAtivo = async (req: Request, res: Response) => {
         valor,
         dataAquisicao: new Date(dataAquisicao),
         observacao,
-        qtdReparos,
       },
     });
 
@@ -173,6 +177,7 @@ export const moveAtivo = async (req: Request, res: Response) => {
 
     if (isNaN(id)) {
       res.status(400).json({ mensagem: "ID inválido" });
+      return;
     }
 
     const ativo = await db.findUnique({
@@ -182,6 +187,7 @@ export const moveAtivo = async (req: Request, res: Response) => {
 
     if (!ativo) {
       res.status(404).json({ mensagem: "Ativo não encontrado" });
+      return;
     }
 
     const dataToUpdate: any = {};

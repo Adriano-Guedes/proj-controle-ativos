@@ -129,7 +129,6 @@ exports.Prisma.AtivoScalarFieldEnum = {
   valor: 'valor',
   dataAquisicao: 'dataAquisicao',
   observacao: 'observacao',
-  qtdReparos: 'qtdReparos',
   chaveResponsavel: 'chaveResponsavel',
   chaveLocalizacao: 'chaveLocalizacao'
 };

@@ -23,7 +23,6 @@ model Ativo {
   valor             Decimal   @db.Decimal(10, 2)
   dataAquisicao     DateTime
   observacao        String?   @db.Text
-  qtdReparos        Int
 
   responsavel       Usuario?   @relation(fields: [chaveResponsavel], references: [id])
   chaveResponsavel  String?
