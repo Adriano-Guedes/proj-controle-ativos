@@ -12,30 +12,31 @@ export const getAllAtivos = async (req: Request, res: Response) => {
   try {
     const filters: any = {};
 
-    if (req.query.nome) {
+    if (req.body.nome) {
       filters.nome = {
-        contains: req.query.nome.toString(),
-        mode: "insensitive",
-      }; // busca sem case sensitive
+        contains: req.body.nome.toString(),
+      };
     }
 
-    if (req.query.codInterno) {
-      filters.codInterno = req.query.codInterno.toString();
+    if (req.body.codInterno) {
+      filters.codInterno = {
+        contains: req.body.codInterno.toString()
+      }
     }
 
-    if (req.query.status) {
-      filters.status = req.query.status.toString();
+    if (req.body.status) {
+      filters.status = req.body.status.toString();
     }
 
-    if (req.query.chaveResponsavel) {
+    if (req.body.chaveResponsavel) {
       filters.chaveResponsavel = parseInt(
-        req.query.chaveResponsavel.toString()
+        req.body.chaveResponsavel.toString()
       );
     }
 
-    if (req.query.chaveLocalizacao) {
+    if (req.body.chaveLocalizacao) {
       filters.chaveLocalizacao = parseInt(
-        req.query.chaveLocalizacao.toString()
+        req.body.chaveLocalizacao.toString()
       );
     }
 
@@ -50,7 +51,7 @@ export const getAllAtivos = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ data: ativos });
+    res.status(200).json(ativos ? { data: ativos } : { mensagem: "Consulta não gerou resultado" });
   } catch (e) {
     res.status(500).json({ error: e });
   }

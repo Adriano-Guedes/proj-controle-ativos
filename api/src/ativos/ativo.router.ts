@@ -4,7 +4,7 @@ import { getAllAtivos, getAtivoById, createAtivo, updateAtivo, deleteAtivo, move
 
 const ativoRouter = Router();
 
-ativoRouter.get("/", getAllAtivos);
+ativoRouter.post("/lista", getAllAtivos);
 ativoRouter.get("/:id", getAtivoById);
 ativoRouter.post("/", createAtivo);
 ativoRouter.put("/:id", updateAtivo);
