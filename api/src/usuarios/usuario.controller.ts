@@ -4,6 +4,7 @@ import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
 import { Request, Response } from "express";
 import { CreateUsuarioDto } from "./dto/create-usuario.dto";
+import { UpdateUsuarioDto } from "./dto/update-usuario.dto";
 
 const db = new PrismaClient().usuario;
 
@@ -14,19 +15,17 @@ export const getAllUsuarios = async (req: Request, res: Response) => {
     const filters: any = {};
 
     if (req.body.nome) {
-      filters.nome = { contains: req.body.nome, mode: "insensitive" };
+      filters.nome = {
+        contains: req.body.nome.toString(),
+      };
     }
 
     if (req.body.email) {
-      filters.email = req.body.email;
+      filters.email = { contains: req.body.email.toString()};
     }
 
-    if (req.body.login) {
-      filters.login = req.body.login;
-    }
-
-    if (req.body.chaveCargo) {
-      filters.chaveCargo = parseInt(req.body.chaveCargo);
+    if (req.body.nomeCargo) {
+      filters.cargo = { nome: {contains: req.body.nomeCargo}};
     }
 
     const usuarios = await db.findMany({
@@ -43,7 +42,6 @@ export const getAllUsuarios = async (req: Request, res: Response) => {
         nome: "asc",
       },
     });
-
     res.status(200).json({ data: usuarios });
   } catch (e) {
     console.error(e);
@@ -103,6 +101,7 @@ export const createUsuario = async (req: Request, res: Response) => {
 
     const hash = await bcrypt.hash(newUsuario.senha, 10);
 
+    //const comparacao = await bcrypt.compare(newUsuario.senha,hash); 
     const novoUsuario = await db.create({
       data: {
         nome: newUsuario.nome,
@@ -121,22 +120,19 @@ export const createUsuario = async (req: Request, res: Response) => {
 // Update usuario
 export const updateUsuario = async (req: Request, res: Response) => {
   try {
-    const { nome, email, chaveCargo } = req.body;
-
-    const dataToUpdate: any = {};
-    if (nome !== undefined) dataToUpdate.nome = nome;
-    if (email !== undefined) dataToUpdate.email = email;
-    if (chaveCargo !== undefined) dataToUpdate.chaveCargo = chaveCargo;
-
-    if (Object.keys(dataToUpdate).length === 0) {
-      res.status(400).json({ mensagem: "Nenhum campo para atualizar" });
+    const newDataUsuario = plainToInstance(UpdateUsuarioDto, req.body);
+    const erros = await validate(newDataUsuario);
+    if (erros.length > 0) {
+      const mensagens = erros.map(e => Object.values(e.constraints ?? {})).flat();
+      res.status(400).json({ erros: mensagens });
+      return;
     }
 
     await db.update({
       where: {
         id: req.params.id,
       },
-      data: dataToUpdate,
+      data: newDataUsuario,
     });
 
     const usuario = await db.findUnique({
@@ -171,8 +167,3 @@ export const deleteUsuario = async (req: Request, res: Response) => {
     res.status(500).json({ erro: e });
   }
 };
-
-function validarSenha(senha: string): boolean {
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
-  return regex.test(senha);
-}
