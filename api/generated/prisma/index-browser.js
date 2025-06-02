@@ -155,8 +155,8 @@ exports.Prisma.LocalizacaoScalarFieldEnum = {
 
 exports.Prisma.HistoricoAlocacaoScalarFieldEnum = {
   id: 'id',
-  chaveAtivo: 'chaveAtivo',
   data: 'data',
+  chaveAtivo: 'chaveAtivo',
   chaveLocalizacaoOrigem: 'chaveLocalizacaoOrigem',
   chaveResponsavelOrigem: 'chaveResponsavelOrigem',
   chaveLocalizacaoDestino: 'chaveLocalizacaoDestino',

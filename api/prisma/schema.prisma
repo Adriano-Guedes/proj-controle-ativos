@@ -29,6 +29,8 @@ model Ativo {
 
   localizacao       Localizacao?    @relation(fields: [chaveLocalizacao], references: [id])
   chaveLocalizacao  Int?
+
+  historicosAtivo   HistoricoAlocacao[] @relation(name: "NomeAtivo")
 }
 
 model Usuario{
@@ -65,8 +67,10 @@ model Localizacao {
 
 model HistoricoAlocacao {
   id                      Int       @id @default(autoincrement())
-  chaveAtivo              Int
   data                    DateTime
+
+  ativo                   Ativo       @relation(name: "NomeAtivo", fields: [chaveAtivo], references: [id])
+  chaveAtivo              Int
 
   localizacaoOrigem       Localizacao? @relation(name: "OrigemLocalizacao", fields: [chaveLocalizacaoOrigem], references: [id])
   chaveLocalizacaoOrigem  Int?

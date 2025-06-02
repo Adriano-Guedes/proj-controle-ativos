@@ -8,7 +8,6 @@ import { UpdateUsuarioDto } from "./dto/update-usuario.dto";
 
 const db = new PrismaClient().usuario;
 
-
 // Get all usuarios
 export const getAllUsuarios = async (req: Request, res: Response) => {
   try {

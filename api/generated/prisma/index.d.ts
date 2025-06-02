@@ -1189,6 +1189,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AtivoCountOutputType
+   */
+
+  export type AtivoCountOutputType = {
+    historicosAtivo: number
+  }
+
+  export type AtivoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    historicosAtivo?: boolean | AtivoCountOutputTypeCountHistoricosAtivoArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AtivoCountOutputType without action
+   */
+  export type AtivoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtivoCountOutputType
+     */
+    select?: AtivoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AtivoCountOutputType without action
+   */
+  export type AtivoCountOutputTypeCountHistoricosAtivoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HistoricoAlocacaoWhereInput
+  }
+
+
+  /**
    * Count Type UsuarioCountOutputType
    */
 
@@ -1569,6 +1600,8 @@ export namespace Prisma {
     chaveLocalizacao?: boolean
     responsavel?: boolean | Ativo$responsavelArgs<ExtArgs>
     localizacao?: boolean | Ativo$localizacaoArgs<ExtArgs>
+    historicosAtivo?: boolean | Ativo$historicosAtivoArgs<ExtArgs>
+    _count?: boolean | AtivoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ativo"]>
 
 
@@ -1590,6 +1623,8 @@ export namespace Prisma {
   export type AtivoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     responsavel?: boolean | Ativo$responsavelArgs<ExtArgs>
     localizacao?: boolean | Ativo$localizacaoArgs<ExtArgs>
+    historicosAtivo?: boolean | Ativo$historicosAtivoArgs<ExtArgs>
+    _count?: boolean | AtivoCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $AtivoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1597,6 +1632,7 @@ export namespace Prisma {
     objects: {
       responsavel: Prisma.$UsuarioPayload<ExtArgs> | null
       localizacao: Prisma.$LocalizacaoPayload<ExtArgs> | null
+      historicosAtivo: Prisma.$HistoricoAlocacaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1951,6 +1987,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     responsavel<T extends Ativo$responsavelArgs<ExtArgs> = {}>(args?: Subset<T, Ativo$responsavelArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     localizacao<T extends Ativo$localizacaoArgs<ExtArgs> = {}>(args?: Subset<T, Ativo$localizacaoArgs<ExtArgs>>): Prisma__LocalizacaoClient<$Result.GetResult<Prisma.$LocalizacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    historicosAtivo<T extends Ativo$historicosAtivoArgs<ExtArgs> = {}>(args?: Subset<T, Ativo$historicosAtivoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistoricoAlocacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2368,6 +2405,30 @@ export namespace Prisma {
      */
     include?: LocalizacaoInclude<ExtArgs> | null
     where?: LocalizacaoWhereInput
+  }
+
+  /**
+   * Ativo.historicosAtivo
+   */
+  export type Ativo$historicosAtivoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistoricoAlocacao
+     */
+    select?: HistoricoAlocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HistoricoAlocacao
+     */
+    omit?: HistoricoAlocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HistoricoAlocacaoInclude<ExtArgs> | null
+    where?: HistoricoAlocacaoWhereInput
+    orderBy?: HistoricoAlocacaoOrderByWithRelationInput | HistoricoAlocacaoOrderByWithRelationInput[]
+    cursor?: HistoricoAlocacaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HistoricoAlocacaoScalarFieldEnum | HistoricoAlocacaoScalarFieldEnum[]
   }
 
   /**
@@ -5475,8 +5536,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMinAggregateOutputType = {
     id: number | null
-    chaveAtivo: number | null
     data: Date | null
+    chaveAtivo: number | null
     chaveLocalizacaoOrigem: number | null
     chaveResponsavelOrigem: string | null
     chaveLocalizacaoDestino: number | null
@@ -5485,8 +5546,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMaxAggregateOutputType = {
     id: number | null
-    chaveAtivo: number | null
     data: Date | null
+    chaveAtivo: number | null
     chaveLocalizacaoOrigem: number | null
     chaveResponsavelOrigem: string | null
     chaveLocalizacaoDestino: number | null
@@ -5495,8 +5556,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCountAggregateOutputType = {
     id: number
-    chaveAtivo: number
     data: number
+    chaveAtivo: number
     chaveLocalizacaoOrigem: number
     chaveResponsavelOrigem: number
     chaveLocalizacaoDestino: number
@@ -5521,8 +5582,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMinAggregateInputType = {
     id?: true
-    chaveAtivo?: true
     data?: true
+    chaveAtivo?: true
     chaveLocalizacaoOrigem?: true
     chaveResponsavelOrigem?: true
     chaveLocalizacaoDestino?: true
@@ -5531,8 +5592,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMaxAggregateInputType = {
     id?: true
-    chaveAtivo?: true
     data?: true
+    chaveAtivo?: true
     chaveLocalizacaoOrigem?: true
     chaveResponsavelOrigem?: true
     chaveLocalizacaoDestino?: true
@@ -5541,8 +5602,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCountAggregateInputType = {
     id?: true
-    chaveAtivo?: true
     data?: true
+    chaveAtivo?: true
     chaveLocalizacaoOrigem?: true
     chaveResponsavelOrigem?: true
     chaveLocalizacaoDestino?: true
@@ -5638,8 +5699,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoGroupByOutputType = {
     id: number
-    chaveAtivo: number
     data: Date
+    chaveAtivo: number
     chaveLocalizacaoOrigem: number | null
     chaveResponsavelOrigem: string | null
     chaveLocalizacaoDestino: number | null
@@ -5667,12 +5728,13 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    chaveAtivo?: boolean
     data?: boolean
+    chaveAtivo?: boolean
     chaveLocalizacaoOrigem?: boolean
     chaveResponsavelOrigem?: boolean
     chaveLocalizacaoDestino?: boolean
     chaveResponsavelDestino?: boolean
+    ativo?: boolean | AtivoDefaultArgs<ExtArgs>
     localizacaoOrigem?: boolean | HistoricoAlocacao$localizacaoOrigemArgs<ExtArgs>
     responsavelOrigem?: boolean | HistoricoAlocacao$responsavelOrigemArgs<ExtArgs>
     localizacaoDestino?: boolean | HistoricoAlocacao$localizacaoDestinoArgs<ExtArgs>
@@ -5683,16 +5745,17 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoSelectScalar = {
     id?: boolean
-    chaveAtivo?: boolean
     data?: boolean
+    chaveAtivo?: boolean
     chaveLocalizacaoOrigem?: boolean
     chaveResponsavelOrigem?: boolean
     chaveLocalizacaoDestino?: boolean
     chaveResponsavelDestino?: boolean
   }
 
-  export type HistoricoAlocacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chaveAtivo" | "data" | "chaveLocalizacaoOrigem" | "chaveResponsavelOrigem" | "chaveLocalizacaoDestino" | "chaveResponsavelDestino", ExtArgs["result"]["historicoAlocacao"]>
+  export type HistoricoAlocacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "data" | "chaveAtivo" | "chaveLocalizacaoOrigem" | "chaveResponsavelOrigem" | "chaveLocalizacaoDestino" | "chaveResponsavelDestino", ExtArgs["result"]["historicoAlocacao"]>
   export type HistoricoAlocacaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ativo?: boolean | AtivoDefaultArgs<ExtArgs>
     localizacaoOrigem?: boolean | HistoricoAlocacao$localizacaoOrigemArgs<ExtArgs>
     responsavelOrigem?: boolean | HistoricoAlocacao$responsavelOrigemArgs<ExtArgs>
     localizacaoDestino?: boolean | HistoricoAlocacao$localizacaoDestinoArgs<ExtArgs>
@@ -5702,6 +5765,7 @@ export namespace Prisma {
   export type $HistoricoAlocacaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "HistoricoAlocacao"
     objects: {
+      ativo: Prisma.$AtivoPayload<ExtArgs>
       localizacaoOrigem: Prisma.$LocalizacaoPayload<ExtArgs> | null
       responsavelOrigem: Prisma.$UsuarioPayload<ExtArgs> | null
       localizacaoDestino: Prisma.$LocalizacaoPayload<ExtArgs> | null
@@ -5709,8 +5773,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      chaveAtivo: number
       data: Date
+      chaveAtivo: number
       chaveLocalizacaoOrigem: number | null
       chaveResponsavelOrigem: string | null
       chaveLocalizacaoDestino: number | null
@@ -6055,6 +6119,7 @@ export namespace Prisma {
    */
   export interface Prisma__HistoricoAlocacaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    ativo<T extends AtivoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AtivoDefaultArgs<ExtArgs>>): Prisma__AtivoClient<$Result.GetResult<Prisma.$AtivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     localizacaoOrigem<T extends HistoricoAlocacao$localizacaoOrigemArgs<ExtArgs> = {}>(args?: Subset<T, HistoricoAlocacao$localizacaoOrigemArgs<ExtArgs>>): Prisma__LocalizacaoClient<$Result.GetResult<Prisma.$LocalizacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     responsavelOrigem<T extends HistoricoAlocacao$responsavelOrigemArgs<ExtArgs> = {}>(args?: Subset<T, HistoricoAlocacao$responsavelOrigemArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     localizacaoDestino<T extends HistoricoAlocacao$localizacaoDestinoArgs<ExtArgs> = {}>(args?: Subset<T, HistoricoAlocacao$localizacaoDestinoArgs<ExtArgs>>): Prisma__LocalizacaoClient<$Result.GetResult<Prisma.$LocalizacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -6089,8 +6154,8 @@ export namespace Prisma {
    */
   interface HistoricoAlocacaoFieldRefs {
     readonly id: FieldRef<"HistoricoAlocacao", 'Int'>
-    readonly chaveAtivo: FieldRef<"HistoricoAlocacao", 'Int'>
     readonly data: FieldRef<"HistoricoAlocacao", 'DateTime'>
+    readonly chaveAtivo: FieldRef<"HistoricoAlocacao", 'Int'>
     readonly chaveLocalizacaoOrigem: FieldRef<"HistoricoAlocacao", 'Int'>
     readonly chaveResponsavelOrigem: FieldRef<"HistoricoAlocacao", 'String'>
     readonly chaveLocalizacaoDestino: FieldRef<"HistoricoAlocacao", 'Int'>
@@ -6593,8 +6658,8 @@ export namespace Prisma {
 
   export const HistoricoAlocacaoScalarFieldEnum: {
     id: 'id',
-    chaveAtivo: 'chaveAtivo',
     data: 'data',
+    chaveAtivo: 'chaveAtivo',
     chaveLocalizacaoOrigem: 'chaveLocalizacaoOrigem',
     chaveResponsavelOrigem: 'chaveResponsavelOrigem',
     chaveLocalizacaoDestino: 'chaveLocalizacaoDestino',
@@ -6725,6 +6790,7 @@ export namespace Prisma {
     chaveLocalizacao?: IntNullableFilter<"Ativo"> | number | null
     responsavel?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
     localizacao?: XOR<LocalizacaoNullableScalarRelationFilter, LocalizacaoWhereInput> | null
+    historicosAtivo?: HistoricoAlocacaoListRelationFilter
   }
 
   export type AtivoOrderByWithRelationInput = {
@@ -6740,6 +6806,7 @@ export namespace Prisma {
     chaveLocalizacao?: SortOrderInput | SortOrder
     responsavel?: UsuarioOrderByWithRelationInput
     localizacao?: LocalizacaoOrderByWithRelationInput
+    historicosAtivo?: HistoricoAlocacaoOrderByRelationAggregateInput
     _relevance?: AtivoOrderByRelevanceInput
   }
 
@@ -6759,6 +6826,7 @@ export namespace Prisma {
     chaveLocalizacao?: IntNullableFilter<"Ativo"> | number | null
     responsavel?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
     localizacao?: XOR<LocalizacaoNullableScalarRelationFilter, LocalizacaoWhereInput> | null
+    historicosAtivo?: HistoricoAlocacaoListRelationFilter
   }, "id" | "codInterno">
 
   export type AtivoOrderByWithAggregationInput = {
@@ -6969,12 +7037,13 @@ export namespace Prisma {
     OR?: HistoricoAlocacaoWhereInput[]
     NOT?: HistoricoAlocacaoWhereInput | HistoricoAlocacaoWhereInput[]
     id?: IntFilter<"HistoricoAlocacao"> | number
-    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
     data?: DateTimeFilter<"HistoricoAlocacao"> | Date | string
+    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
     chaveLocalizacaoOrigem?: IntNullableFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelOrigem?: StringNullableFilter<"HistoricoAlocacao"> | string | null
     chaveLocalizacaoDestino?: IntNullableFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelDestino?: StringNullableFilter<"HistoricoAlocacao"> | string | null
+    ativo?: XOR<AtivoScalarRelationFilter, AtivoWhereInput>
     localizacaoOrigem?: XOR<LocalizacaoNullableScalarRelationFilter, LocalizacaoWhereInput> | null
     responsavelOrigem?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
     localizacaoDestino?: XOR<LocalizacaoNullableScalarRelationFilter, LocalizacaoWhereInput> | null
@@ -6983,12 +7052,13 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoOrderByWithRelationInput = {
     id?: SortOrder
-    chaveAtivo?: SortOrder
     data?: SortOrder
+    chaveAtivo?: SortOrder
     chaveLocalizacaoOrigem?: SortOrderInput | SortOrder
     chaveResponsavelOrigem?: SortOrderInput | SortOrder
     chaveLocalizacaoDestino?: SortOrderInput | SortOrder
     chaveResponsavelDestino?: SortOrderInput | SortOrder
+    ativo?: AtivoOrderByWithRelationInput
     localizacaoOrigem?: LocalizacaoOrderByWithRelationInput
     responsavelOrigem?: UsuarioOrderByWithRelationInput
     localizacaoDestino?: LocalizacaoOrderByWithRelationInput
@@ -7001,12 +7071,13 @@ export namespace Prisma {
     AND?: HistoricoAlocacaoWhereInput | HistoricoAlocacaoWhereInput[]
     OR?: HistoricoAlocacaoWhereInput[]
     NOT?: HistoricoAlocacaoWhereInput | HistoricoAlocacaoWhereInput[]
-    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
     data?: DateTimeFilter<"HistoricoAlocacao"> | Date | string
+    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
     chaveLocalizacaoOrigem?: IntNullableFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelOrigem?: StringNullableFilter<"HistoricoAlocacao"> | string | null
     chaveLocalizacaoDestino?: IntNullableFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelDestino?: StringNullableFilter<"HistoricoAlocacao"> | string | null
+    ativo?: XOR<AtivoScalarRelationFilter, AtivoWhereInput>
     localizacaoOrigem?: XOR<LocalizacaoNullableScalarRelationFilter, LocalizacaoWhereInput> | null
     responsavelOrigem?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
     localizacaoDestino?: XOR<LocalizacaoNullableScalarRelationFilter, LocalizacaoWhereInput> | null
@@ -7015,8 +7086,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoOrderByWithAggregationInput = {
     id?: SortOrder
-    chaveAtivo?: SortOrder
     data?: SortOrder
+    chaveAtivo?: SortOrder
     chaveLocalizacaoOrigem?: SortOrderInput | SortOrder
     chaveResponsavelOrigem?: SortOrderInput | SortOrder
     chaveLocalizacaoDestino?: SortOrderInput | SortOrder
@@ -7033,8 +7104,8 @@ export namespace Prisma {
     OR?: HistoricoAlocacaoScalarWhereWithAggregatesInput[]
     NOT?: HistoricoAlocacaoScalarWhereWithAggregatesInput | HistoricoAlocacaoScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"HistoricoAlocacao"> | number
-    chaveAtivo?: IntWithAggregatesFilter<"HistoricoAlocacao"> | number
     data?: DateTimeWithAggregatesFilter<"HistoricoAlocacao"> | Date | string
+    chaveAtivo?: IntWithAggregatesFilter<"HistoricoAlocacao"> | number
     chaveLocalizacaoOrigem?: IntNullableWithAggregatesFilter<"HistoricoAlocacao"> | number | null
     chaveResponsavelOrigem?: StringNullableWithAggregatesFilter<"HistoricoAlocacao"> | string | null
     chaveLocalizacaoDestino?: IntNullableWithAggregatesFilter<"HistoricoAlocacao"> | number | null
@@ -7051,6 +7122,7 @@ export namespace Prisma {
     observacao?: string | null
     responsavel?: UsuarioCreateNestedOneWithoutAtivosInput
     localizacao?: LocalizacaoCreateNestedOneWithoutAtivosInput
+    historicosAtivo?: HistoricoAlocacaoCreateNestedManyWithoutAtivoInput
   }
 
   export type AtivoUncheckedCreateInput = {
@@ -7064,6 +7136,7 @@ export namespace Prisma {
     observacao?: string | null
     chaveResponsavel?: string | null
     chaveLocalizacao?: number | null
+    historicosAtivo?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutAtivoInput
   }
 
   export type AtivoUpdateInput = {
@@ -7076,6 +7149,7 @@ export namespace Prisma {
     observacao?: NullableStringFieldUpdateOperationsInput | string | null
     responsavel?: UsuarioUpdateOneWithoutAtivosNestedInput
     localizacao?: LocalizacaoUpdateOneWithoutAtivosNestedInput
+    historicosAtivo?: HistoricoAlocacaoUpdateManyWithoutAtivoNestedInput
   }
 
   export type AtivoUncheckedUpdateInput = {
@@ -7089,6 +7163,7 @@ export namespace Prisma {
     observacao?: NullableStringFieldUpdateOperationsInput | string | null
     chaveResponsavel?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacao?: NullableIntFieldUpdateOperationsInput | number | null
+    historicosAtivo?: HistoricoAlocacaoUncheckedUpdateManyWithoutAtivoNestedInput
   }
 
   export type AtivoCreateManyInput = {
@@ -7289,8 +7364,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateInput = {
-    chaveAtivo: number
     data: Date | string
+    ativo: AtivoCreateNestedOneWithoutHistoricosAtivoInput
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
     localizacaoDestino?: LocalizacaoCreateNestedOneWithoutHistoricosDestinoInput
@@ -7299,8 +7374,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
@@ -7308,8 +7383,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateInput = {
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ativo?: AtivoUpdateOneRequiredWithoutHistoricosAtivoNestedInput
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
     localizacaoDestino?: LocalizacaoUpdateOneWithoutHistoricosDestinoNestedInput
@@ -7318,8 +7393,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7328,8 +7403,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
@@ -7337,14 +7412,13 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateManyMutationInput = {
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HistoricoAlocacaoUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -7435,9 +7509,19 @@ export namespace Prisma {
     isNot?: LocalizacaoWhereInput | null
   }
 
+  export type HistoricoAlocacaoListRelationFilter = {
+    every?: HistoricoAlocacaoWhereInput
+    some?: HistoricoAlocacaoWhereInput
+    none?: HistoricoAlocacaoWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type HistoricoAlocacaoOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type AtivoOrderByRelevanceInput = {
@@ -7606,17 +7690,7 @@ export namespace Prisma {
     none?: AtivoWhereInput
   }
 
-  export type HistoricoAlocacaoListRelationFilter = {
-    every?: HistoricoAlocacaoWhereInput
-    some?: HistoricoAlocacaoWhereInput
-    none?: HistoricoAlocacaoWhereInput
-  }
-
   export type AtivoOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type HistoricoAlocacaoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7732,6 +7806,11 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type AtivoScalarRelationFilter = {
+    is?: AtivoWhereInput
+    isNot?: AtivoWhereInput
+  }
+
   export type HistoricoAlocacaoOrderByRelevanceInput = {
     fields: HistoricoAlocacaoOrderByRelevanceFieldEnum | HistoricoAlocacaoOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -7740,8 +7819,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCountOrderByAggregateInput = {
     id?: SortOrder
-    chaveAtivo?: SortOrder
     data?: SortOrder
+    chaveAtivo?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveResponsavelOrigem?: SortOrder
     chaveLocalizacaoDestino?: SortOrder
@@ -7757,8 +7836,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMaxOrderByAggregateInput = {
     id?: SortOrder
-    chaveAtivo?: SortOrder
     data?: SortOrder
+    chaveAtivo?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveResponsavelOrigem?: SortOrder
     chaveLocalizacaoDestino?: SortOrder
@@ -7767,8 +7846,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoMinOrderByAggregateInput = {
     id?: SortOrder
-    chaveAtivo?: SortOrder
     data?: SortOrder
+    chaveAtivo?: SortOrder
     chaveLocalizacaoOrigem?: SortOrder
     chaveResponsavelOrigem?: SortOrder
     chaveLocalizacaoDestino?: SortOrder
@@ -7792,6 +7871,20 @@ export namespace Prisma {
     create?: XOR<LocalizacaoCreateWithoutAtivosInput, LocalizacaoUncheckedCreateWithoutAtivosInput>
     connectOrCreate?: LocalizacaoCreateOrConnectWithoutAtivosInput
     connect?: LocalizacaoWhereUniqueInput
+  }
+
+  export type HistoricoAlocacaoCreateNestedManyWithoutAtivoInput = {
+    create?: XOR<HistoricoAlocacaoCreateWithoutAtivoInput, HistoricoAlocacaoUncheckedCreateWithoutAtivoInput> | HistoricoAlocacaoCreateWithoutAtivoInput[] | HistoricoAlocacaoUncheckedCreateWithoutAtivoInput[]
+    connectOrCreate?: HistoricoAlocacaoCreateOrConnectWithoutAtivoInput | HistoricoAlocacaoCreateOrConnectWithoutAtivoInput[]
+    createMany?: HistoricoAlocacaoCreateManyAtivoInputEnvelope
+    connect?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+  }
+
+  export type HistoricoAlocacaoUncheckedCreateNestedManyWithoutAtivoInput = {
+    create?: XOR<HistoricoAlocacaoCreateWithoutAtivoInput, HistoricoAlocacaoUncheckedCreateWithoutAtivoInput> | HistoricoAlocacaoCreateWithoutAtivoInput[] | HistoricoAlocacaoUncheckedCreateWithoutAtivoInput[]
+    connectOrCreate?: HistoricoAlocacaoCreateOrConnectWithoutAtivoInput | HistoricoAlocacaoCreateOrConnectWithoutAtivoInput[]
+    createMany?: HistoricoAlocacaoCreateManyAtivoInputEnvelope
+    connect?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7834,6 +7927,20 @@ export namespace Prisma {
     update?: XOR<XOR<LocalizacaoUpdateToOneWithWhereWithoutAtivosInput, LocalizacaoUpdateWithoutAtivosInput>, LocalizacaoUncheckedUpdateWithoutAtivosInput>
   }
 
+  export type HistoricoAlocacaoUpdateManyWithoutAtivoNestedInput = {
+    create?: XOR<HistoricoAlocacaoCreateWithoutAtivoInput, HistoricoAlocacaoUncheckedCreateWithoutAtivoInput> | HistoricoAlocacaoCreateWithoutAtivoInput[] | HistoricoAlocacaoUncheckedCreateWithoutAtivoInput[]
+    connectOrCreate?: HistoricoAlocacaoCreateOrConnectWithoutAtivoInput | HistoricoAlocacaoCreateOrConnectWithoutAtivoInput[]
+    upsert?: HistoricoAlocacaoUpsertWithWhereUniqueWithoutAtivoInput | HistoricoAlocacaoUpsertWithWhereUniqueWithoutAtivoInput[]
+    createMany?: HistoricoAlocacaoCreateManyAtivoInputEnvelope
+    set?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    disconnect?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    delete?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    connect?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    update?: HistoricoAlocacaoUpdateWithWhereUniqueWithoutAtivoInput | HistoricoAlocacaoUpdateWithWhereUniqueWithoutAtivoInput[]
+    updateMany?: HistoricoAlocacaoUpdateManyWithWhereWithoutAtivoInput | HistoricoAlocacaoUpdateManyWithWhereWithoutAtivoInput[]
+    deleteMany?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -7848,6 +7955,20 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type HistoricoAlocacaoUncheckedUpdateManyWithoutAtivoNestedInput = {
+    create?: XOR<HistoricoAlocacaoCreateWithoutAtivoInput, HistoricoAlocacaoUncheckedCreateWithoutAtivoInput> | HistoricoAlocacaoCreateWithoutAtivoInput[] | HistoricoAlocacaoUncheckedCreateWithoutAtivoInput[]
+    connectOrCreate?: HistoricoAlocacaoCreateOrConnectWithoutAtivoInput | HistoricoAlocacaoCreateOrConnectWithoutAtivoInput[]
+    upsert?: HistoricoAlocacaoUpsertWithWhereUniqueWithoutAtivoInput | HistoricoAlocacaoUpsertWithWhereUniqueWithoutAtivoInput[]
+    createMany?: HistoricoAlocacaoCreateManyAtivoInputEnvelope
+    set?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    disconnect?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    delete?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    connect?: HistoricoAlocacaoWhereUniqueInput | HistoricoAlocacaoWhereUniqueInput[]
+    update?: HistoricoAlocacaoUpdateWithWhereUniqueWithoutAtivoInput | HistoricoAlocacaoUpdateWithWhereUniqueWithoutAtivoInput[]
+    updateMany?: HistoricoAlocacaoUpdateManyWithWhereWithoutAtivoInput | HistoricoAlocacaoUpdateManyWithWhereWithoutAtivoInput[]
+    deleteMany?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
   }
 
   export type CargoCreateNestedOneWithoutUsuariosInput = {
@@ -8160,6 +8281,12 @@ export namespace Prisma {
     deleteMany?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
   }
 
+  export type AtivoCreateNestedOneWithoutHistoricosAtivoInput = {
+    create?: XOR<AtivoCreateWithoutHistoricosAtivoInput, AtivoUncheckedCreateWithoutHistoricosAtivoInput>
+    connectOrCreate?: AtivoCreateOrConnectWithoutHistoricosAtivoInput
+    connect?: AtivoWhereUniqueInput
+  }
+
   export type LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput = {
     create?: XOR<LocalizacaoCreateWithoutHistoricosOrigemInput, LocalizacaoUncheckedCreateWithoutHistoricosOrigemInput>
     connectOrCreate?: LocalizacaoCreateOrConnectWithoutHistoricosOrigemInput
@@ -8182,6 +8309,14 @@ export namespace Prisma {
     create?: XOR<UsuarioCreateWithoutHistoricosDestinoInput, UsuarioUncheckedCreateWithoutHistoricosDestinoInput>
     connectOrCreate?: UsuarioCreateOrConnectWithoutHistoricosDestinoInput
     connect?: UsuarioWhereUniqueInput
+  }
+
+  export type AtivoUpdateOneRequiredWithoutHistoricosAtivoNestedInput = {
+    create?: XOR<AtivoCreateWithoutHistoricosAtivoInput, AtivoUncheckedCreateWithoutHistoricosAtivoInput>
+    connectOrCreate?: AtivoCreateOrConnectWithoutHistoricosAtivoInput
+    upsert?: AtivoUpsertWithoutHistoricosAtivoInput
+    connect?: AtivoWhereUniqueInput
+    update?: XOR<XOR<AtivoUpdateToOneWithWhereWithoutHistoricosAtivoInput, AtivoUpdateWithoutHistoricosAtivoInput>, AtivoUncheckedUpdateWithoutHistoricosAtivoInput>
   }
 
   export type LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput = {
@@ -8465,6 +8600,33 @@ export namespace Prisma {
     create: XOR<LocalizacaoCreateWithoutAtivosInput, LocalizacaoUncheckedCreateWithoutAtivosInput>
   }
 
+  export type HistoricoAlocacaoCreateWithoutAtivoInput = {
+    data: Date | string
+    localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
+    responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
+    localizacaoDestino?: LocalizacaoCreateNestedOneWithoutHistoricosDestinoInput
+    responsavelDestino?: UsuarioCreateNestedOneWithoutHistoricosDestinoInput
+  }
+
+  export type HistoricoAlocacaoUncheckedCreateWithoutAtivoInput = {
+    id?: number
+    data: Date | string
+    chaveLocalizacaoOrigem?: number | null
+    chaveResponsavelOrigem?: string | null
+    chaveLocalizacaoDestino?: number | null
+    chaveResponsavelDestino?: string | null
+  }
+
+  export type HistoricoAlocacaoCreateOrConnectWithoutAtivoInput = {
+    where: HistoricoAlocacaoWhereUniqueInput
+    create: XOR<HistoricoAlocacaoCreateWithoutAtivoInput, HistoricoAlocacaoUncheckedCreateWithoutAtivoInput>
+  }
+
+  export type HistoricoAlocacaoCreateManyAtivoInputEnvelope = {
+    data: HistoricoAlocacaoCreateManyAtivoInput | HistoricoAlocacaoCreateManyAtivoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UsuarioUpsertWithoutAtivosInput = {
     update: XOR<UsuarioUpdateWithoutAtivosInput, UsuarioUncheckedUpdateWithoutAtivosInput>
     create: XOR<UsuarioCreateWithoutAtivosInput, UsuarioUncheckedCreateWithoutAtivosInput>
@@ -8524,6 +8686,35 @@ export namespace Prisma {
     historicosDestino?: HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoDestinoNestedInput
   }
 
+  export type HistoricoAlocacaoUpsertWithWhereUniqueWithoutAtivoInput = {
+    where: HistoricoAlocacaoWhereUniqueInput
+    update: XOR<HistoricoAlocacaoUpdateWithoutAtivoInput, HistoricoAlocacaoUncheckedUpdateWithoutAtivoInput>
+    create: XOR<HistoricoAlocacaoCreateWithoutAtivoInput, HistoricoAlocacaoUncheckedCreateWithoutAtivoInput>
+  }
+
+  export type HistoricoAlocacaoUpdateWithWhereUniqueWithoutAtivoInput = {
+    where: HistoricoAlocacaoWhereUniqueInput
+    data: XOR<HistoricoAlocacaoUpdateWithoutAtivoInput, HistoricoAlocacaoUncheckedUpdateWithoutAtivoInput>
+  }
+
+  export type HistoricoAlocacaoUpdateManyWithWhereWithoutAtivoInput = {
+    where: HistoricoAlocacaoScalarWhereInput
+    data: XOR<HistoricoAlocacaoUpdateManyMutationInput, HistoricoAlocacaoUncheckedUpdateManyWithoutAtivoInput>
+  }
+
+  export type HistoricoAlocacaoScalarWhereInput = {
+    AND?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
+    OR?: HistoricoAlocacaoScalarWhereInput[]
+    NOT?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
+    id?: IntFilter<"HistoricoAlocacao"> | number
+    data?: DateTimeFilter<"HistoricoAlocacao"> | Date | string
+    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
+    chaveLocalizacaoOrigem?: IntNullableFilter<"HistoricoAlocacao"> | number | null
+    chaveResponsavelOrigem?: StringNullableFilter<"HistoricoAlocacao"> | string | null
+    chaveLocalizacaoDestino?: IntNullableFilter<"HistoricoAlocacao"> | number | null
+    chaveResponsavelDestino?: StringNullableFilter<"HistoricoAlocacao"> | string | null
+  }
+
   export type CargoCreateWithoutUsuariosInput = {
     nome: string
   }
@@ -8547,6 +8738,7 @@ export namespace Prisma {
     dataAquisicao: Date | string
     observacao?: string | null
     localizacao?: LocalizacaoCreateNestedOneWithoutAtivosInput
+    historicosAtivo?: HistoricoAlocacaoCreateNestedManyWithoutAtivoInput
   }
 
   export type AtivoUncheckedCreateWithoutResponsavelInput = {
@@ -8559,6 +8751,7 @@ export namespace Prisma {
     dataAquisicao: Date | string
     observacao?: string | null
     chaveLocalizacao?: number | null
+    historicosAtivo?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutAtivoInput
   }
 
   export type AtivoCreateOrConnectWithoutResponsavelInput = {
@@ -8572,8 +8765,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutResponsavelOrigemInput = {
-    chaveAtivo: number
     data: Date | string
+    ativo: AtivoCreateNestedOneWithoutHistoricosAtivoInput
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     localizacaoDestino?: LocalizacaoCreateNestedOneWithoutHistoricosDestinoInput
     responsavelDestino?: UsuarioCreateNestedOneWithoutHistoricosDestinoInput
@@ -8581,8 +8774,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutResponsavelOrigemInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveLocalizacaoDestino?: number | null
     chaveResponsavelDestino?: string | null
@@ -8599,8 +8792,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutResponsavelDestinoInput = {
-    chaveAtivo: number
     data: Date | string
+    ativo: AtivoCreateNestedOneWithoutHistoricosAtivoInput
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
     localizacaoDestino?: LocalizacaoCreateNestedOneWithoutHistoricosDestinoInput
@@ -8608,8 +8801,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutResponsavelDestinoInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
@@ -8691,19 +8884,6 @@ export namespace Prisma {
   export type HistoricoAlocacaoUpdateManyWithWhereWithoutResponsavelOrigemInput = {
     where: HistoricoAlocacaoScalarWhereInput
     data: XOR<HistoricoAlocacaoUpdateManyMutationInput, HistoricoAlocacaoUncheckedUpdateManyWithoutResponsavelOrigemInput>
-  }
-
-  export type HistoricoAlocacaoScalarWhereInput = {
-    AND?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
-    OR?: HistoricoAlocacaoScalarWhereInput[]
-    NOT?: HistoricoAlocacaoScalarWhereInput | HistoricoAlocacaoScalarWhereInput[]
-    id?: IntFilter<"HistoricoAlocacao"> | number
-    chaveAtivo?: IntFilter<"HistoricoAlocacao"> | number
-    data?: DateTimeFilter<"HistoricoAlocacao"> | Date | string
-    chaveLocalizacaoOrigem?: IntNullableFilter<"HistoricoAlocacao"> | number | null
-    chaveResponsavelOrigem?: StringNullableFilter<"HistoricoAlocacao"> | string | null
-    chaveLocalizacaoDestino?: IntNullableFilter<"HistoricoAlocacao"> | number | null
-    chaveResponsavelDestino?: StringNullableFilter<"HistoricoAlocacao"> | string | null
   }
 
   export type HistoricoAlocacaoUpsertWithWhereUniqueWithoutResponsavelDestinoInput = {
@@ -8791,6 +8971,7 @@ export namespace Prisma {
     dataAquisicao: Date | string
     observacao?: string | null
     responsavel?: UsuarioCreateNestedOneWithoutAtivosInput
+    historicosAtivo?: HistoricoAlocacaoCreateNestedManyWithoutAtivoInput
   }
 
   export type AtivoUncheckedCreateWithoutLocalizacaoInput = {
@@ -8803,6 +8984,7 @@ export namespace Prisma {
     dataAquisicao: Date | string
     observacao?: string | null
     chaveResponsavel?: string | null
+    historicosAtivo?: HistoricoAlocacaoUncheckedCreateNestedManyWithoutAtivoInput
   }
 
   export type AtivoCreateOrConnectWithoutLocalizacaoInput = {
@@ -8816,8 +8998,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutLocalizacaoOrigemInput = {
-    chaveAtivo: number
     data: Date | string
+    ativo: AtivoCreateNestedOneWithoutHistoricosAtivoInput
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
     localizacaoDestino?: LocalizacaoCreateNestedOneWithoutHistoricosDestinoInput
     responsavelDestino?: UsuarioCreateNestedOneWithoutHistoricosDestinoInput
@@ -8825,8 +9007,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutLocalizacaoOrigemInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
     chaveResponsavelDestino?: string | null
@@ -8843,8 +9025,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoCreateWithoutLocalizacaoDestinoInput = {
-    chaveAtivo: number
     data: Date | string
+    ativo: AtivoCreateNestedOneWithoutHistoricosAtivoInput
     localizacaoOrigem?: LocalizacaoCreateNestedOneWithoutHistoricosOrigemInput
     responsavelOrigem?: UsuarioCreateNestedOneWithoutHistoricosOrigemInput
     responsavelDestino?: UsuarioCreateNestedOneWithoutHistoricosDestinoInput
@@ -8852,8 +9034,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedCreateWithoutLocalizacaoDestinoInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
     chaveResponsavelDestino?: string | null
@@ -8915,6 +9097,36 @@ export namespace Prisma {
   export type HistoricoAlocacaoUpdateManyWithWhereWithoutLocalizacaoDestinoInput = {
     where: HistoricoAlocacaoScalarWhereInput
     data: XOR<HistoricoAlocacaoUpdateManyMutationInput, HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoDestinoInput>
+  }
+
+  export type AtivoCreateWithoutHistoricosAtivoInput = {
+    nome: string
+    codInterno?: string | null
+    descricao?: string | null
+    status: string
+    valor: Decimal | DecimalJsLike | number | string
+    dataAquisicao: Date | string
+    observacao?: string | null
+    responsavel?: UsuarioCreateNestedOneWithoutAtivosInput
+    localizacao?: LocalizacaoCreateNestedOneWithoutAtivosInput
+  }
+
+  export type AtivoUncheckedCreateWithoutHistoricosAtivoInput = {
+    id?: number
+    nome: string
+    codInterno?: string | null
+    descricao?: string | null
+    status: string
+    valor: Decimal | DecimalJsLike | number | string
+    dataAquisicao: Date | string
+    observacao?: string | null
+    chaveResponsavel?: string | null
+    chaveLocalizacao?: number | null
+  }
+
+  export type AtivoCreateOrConnectWithoutHistoricosAtivoInput = {
+    where: AtivoWhereUniqueInput
+    create: XOR<AtivoCreateWithoutHistoricosAtivoInput, AtivoUncheckedCreateWithoutHistoricosAtivoInput>
   }
 
   export type LocalizacaoCreateWithoutHistoricosOrigemInput = {
@@ -9009,6 +9221,42 @@ export namespace Prisma {
   export type UsuarioCreateOrConnectWithoutHistoricosDestinoInput = {
     where: UsuarioWhereUniqueInput
     create: XOR<UsuarioCreateWithoutHistoricosDestinoInput, UsuarioUncheckedCreateWithoutHistoricosDestinoInput>
+  }
+
+  export type AtivoUpsertWithoutHistoricosAtivoInput = {
+    update: XOR<AtivoUpdateWithoutHistoricosAtivoInput, AtivoUncheckedUpdateWithoutHistoricosAtivoInput>
+    create: XOR<AtivoCreateWithoutHistoricosAtivoInput, AtivoUncheckedCreateWithoutHistoricosAtivoInput>
+    where?: AtivoWhereInput
+  }
+
+  export type AtivoUpdateToOneWithWhereWithoutHistoricosAtivoInput = {
+    where?: AtivoWhereInput
+    data: XOR<AtivoUpdateWithoutHistoricosAtivoInput, AtivoUncheckedUpdateWithoutHistoricosAtivoInput>
+  }
+
+  export type AtivoUpdateWithoutHistoricosAtivoInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    codInterno?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    responsavel?: UsuarioUpdateOneWithoutAtivosNestedInput
+    localizacao?: LocalizacaoUpdateOneWithoutAtivosNestedInput
+  }
+
+  export type AtivoUncheckedUpdateWithoutHistoricosAtivoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    codInterno?: NullableStringFieldUpdateOperationsInput | string | null
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
+    observacao?: NullableStringFieldUpdateOperationsInput | string | null
+    chaveResponsavel?: NullableStringFieldUpdateOperationsInput | string | null
+    chaveLocalizacao?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type LocalizacaoUpsertWithoutHistoricosOrigemInput = {
@@ -9129,6 +9377,41 @@ export namespace Prisma {
     historicosOrigem?: HistoricoAlocacaoUncheckedUpdateManyWithoutResponsavelOrigemNestedInput
   }
 
+  export type HistoricoAlocacaoCreateManyAtivoInput = {
+    id?: number
+    data: Date | string
+    chaveLocalizacaoOrigem?: number | null
+    chaveResponsavelOrigem?: string | null
+    chaveLocalizacaoDestino?: number | null
+    chaveResponsavelDestino?: string | null
+  }
+
+  export type HistoricoAlocacaoUpdateWithoutAtivoInput = {
+    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
+    responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
+    localizacaoDestino?: LocalizacaoUpdateOneWithoutHistoricosDestinoNestedInput
+    responsavelDestino?: UsuarioUpdateOneWithoutHistoricosDestinoNestedInput
+  }
+
+  export type HistoricoAlocacaoUncheckedUpdateWithoutAtivoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
+    chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
+    chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
+    chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type HistoricoAlocacaoUncheckedUpdateManyWithoutAtivoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
+    chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
+    chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
+    chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type AtivoCreateManyResponsavelInput = {
     id?: number
     nome: string
@@ -9143,8 +9426,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyResponsavelOrigemInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveLocalizacaoDestino?: number | null
     chaveResponsavelDestino?: string | null
@@ -9152,8 +9435,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyResponsavelDestinoInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
@@ -9168,6 +9451,7 @@ export namespace Prisma {
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
     observacao?: NullableStringFieldUpdateOperationsInput | string | null
     localizacao?: LocalizacaoUpdateOneWithoutAtivosNestedInput
+    historicosAtivo?: HistoricoAlocacaoUpdateManyWithoutAtivoNestedInput
   }
 
   export type AtivoUncheckedUpdateWithoutResponsavelInput = {
@@ -9180,6 +9464,7 @@ export namespace Prisma {
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
     observacao?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacao?: NullableIntFieldUpdateOperationsInput | number | null
+    historicosAtivo?: HistoricoAlocacaoUncheckedUpdateManyWithoutAtivoNestedInput
   }
 
   export type AtivoUncheckedUpdateManyWithoutResponsavelInput = {
@@ -9195,8 +9480,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateWithoutResponsavelOrigemInput = {
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ativo?: AtivoUpdateOneRequiredWithoutHistoricosAtivoNestedInput
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     localizacaoDestino?: LocalizacaoUpdateOneWithoutHistoricosDestinoNestedInput
     responsavelDestino?: UsuarioUpdateOneWithoutHistoricosDestinoNestedInput
@@ -9204,8 +9489,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutResponsavelOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9213,16 +9498,16 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutResponsavelOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HistoricoAlocacaoUpdateWithoutResponsavelDestinoInput = {
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ativo?: AtivoUpdateOneRequiredWithoutHistoricosAtivoNestedInput
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
     localizacaoDestino?: LocalizacaoUpdateOneWithoutHistoricosDestinoNestedInput
@@ -9230,8 +9515,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutResponsavelDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9239,8 +9524,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutResponsavelDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
@@ -9298,8 +9583,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyLocalizacaoOrigemInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveResponsavelOrigem?: string | null
     chaveLocalizacaoDestino?: number | null
     chaveResponsavelDestino?: string | null
@@ -9307,8 +9592,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoCreateManyLocalizacaoDestinoInput = {
     id?: number
-    chaveAtivo: number
     data: Date | string
+    chaveAtivo: number
     chaveLocalizacaoOrigem?: number | null
     chaveResponsavelOrigem?: string | null
     chaveResponsavelDestino?: string | null
@@ -9323,6 +9608,7 @@ export namespace Prisma {
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
     observacao?: NullableStringFieldUpdateOperationsInput | string | null
     responsavel?: UsuarioUpdateOneWithoutAtivosNestedInput
+    historicosAtivo?: HistoricoAlocacaoUpdateManyWithoutAtivoNestedInput
   }
 
   export type AtivoUncheckedUpdateWithoutLocalizacaoInput = {
@@ -9335,6 +9621,7 @@ export namespace Prisma {
     dataAquisicao?: DateTimeFieldUpdateOperationsInput | Date | string
     observacao?: NullableStringFieldUpdateOperationsInput | string | null
     chaveResponsavel?: NullableStringFieldUpdateOperationsInput | string | null
+    historicosAtivo?: HistoricoAlocacaoUncheckedUpdateManyWithoutAtivoNestedInput
   }
 
   export type AtivoUncheckedUpdateManyWithoutLocalizacaoInput = {
@@ -9350,8 +9637,8 @@ export namespace Prisma {
   }
 
   export type HistoricoAlocacaoUpdateWithoutLocalizacaoOrigemInput = {
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ativo?: AtivoUpdateOneRequiredWithoutHistoricosAtivoNestedInput
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
     localizacaoDestino?: LocalizacaoUpdateOneWithoutHistoricosDestinoNestedInput
     responsavelDestino?: UsuarioUpdateOneWithoutHistoricosDestinoNestedInput
@@ -9359,8 +9646,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutLocalizacaoOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9368,16 +9655,16 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoOrigemInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveLocalizacaoDestino?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HistoricoAlocacaoUpdateWithoutLocalizacaoDestinoInput = {
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    ativo?: AtivoUpdateOneRequiredWithoutHistoricosAtivoNestedInput
     localizacaoOrigem?: LocalizacaoUpdateOneWithoutHistoricosOrigemNestedInput
     responsavelOrigem?: UsuarioUpdateOneWithoutHistoricosOrigemNestedInput
     responsavelDestino?: UsuarioUpdateOneWithoutHistoricosDestinoNestedInput
@@ -9385,8 +9672,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateWithoutLocalizacaoDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9394,8 +9681,8 @@ export namespace Prisma {
 
   export type HistoricoAlocacaoUncheckedUpdateManyWithoutLocalizacaoDestinoInput = {
     id?: IntFieldUpdateOperationsInput | number
-    chaveAtivo?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
+    chaveAtivo?: IntFieldUpdateOperationsInput | number
     chaveLocalizacaoOrigem?: NullableIntFieldUpdateOperationsInput | number | null
     chaveResponsavelOrigem?: NullableStringFieldUpdateOperationsInput | string | null
     chaveResponsavelDestino?: NullableStringFieldUpdateOperationsInput | string | null
