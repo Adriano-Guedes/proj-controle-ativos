@@ -5,6 +5,9 @@ import { validate } from "class-validator";
 import { CreateAtivoDto } from "./dto/create-ativo.dto";
 
 const db = new PrismaClient().ativo;
+const dbLocalizacao = new PrismaClient().localizacao;
+const dbUsuario = new PrismaClient().usuario;
+
 const dbHistoricoMovimentacao = new PrismaClient().historicoAlocacao;
 
 // Get all ativos
@@ -173,12 +176,42 @@ export const deleteAtivo = async (req: Request, res: Response) => {
 // Move ativo
 export const moveAtivo = async (req: Request, res: Response) => {
   try {
-    const { chaveResponsavel, chaveLocalizacao } = req.body;
+    var chaveResponsavel = req.body.chaveResponsavel;
+    var chaveLocalizacao = req.body.chaveLocalizacao;
     const id = parseInt(req.params.id);
 
     if (isNaN(id)) {
       res.status(400).json({ mensagem: "ID inválido" });
-      return;
+      return
+    }
+
+    if (!chaveResponsavel && !chaveLocalizacao) {
+      res.status(400).json({ mensagem: "Nenhuma movimentação a ser realizada" });
+      return
+    }
+
+    if (chaveLocalizacao) {
+      const localizacao = await dbLocalizacao.findUnique({
+        where: { id: chaveLocalizacao },
+      });
+      if (!localizacao) {
+        res.status(404).json({ mensagem: "Localização não encontrada" });
+        return
+      }
+    }else{
+      chaveLocalizacao = null;
+    }
+
+    if (chaveResponsavel) {
+      const usuario = await dbUsuario.findUnique({
+        where: { id: chaveResponsavel },
+      });
+      if (!usuario) {
+        res.status(404).json({ mensagem: "Usuário não encontrado" });
+        return
+      }
+    }else{
+      chaveResponsavel = null;
     }
 
     const ativo = await db.findUnique({
@@ -188,37 +221,29 @@ export const moveAtivo = async (req: Request, res: Response) => {
 
     if (!ativo) {
       res.status(404).json({ mensagem: "Ativo não encontrado" });
-      return;
+      return
     }
 
-    const dataToUpdate: any = {};
+    const updateData: any = {};
 
-    if (chaveLocalizacao !== undefined && chaveLocalizacao !== null) {
-      const chaveLoc = parseInt(chaveLocalizacao);
-      if (!isNaN(chaveLoc)) dataToUpdate.chaveLocalizacao = chaveLoc;
-    }
-
-    if (chaveResponsavel !== undefined && chaveResponsavel !== null) {
-      const chaveResp = parseInt(chaveResponsavel);
-      if (!isNaN(chaveResp)) dataToUpdate.chaveResponsavel = chaveResp;
-    }
+    updateData.chaveResponsavel = chaveResponsavel;
+    updateData.chaveLocalizacao = chaveLocalizacao;
 
     await db.update({
       where: { id },
-      data: dataToUpdate,
+      data: updateData,
     });
 
+    // Registrar histórico
     try {
       await dbHistoricoMovimentacao.create({
         data: {
           chaveAtivo: id,
           data: new Date(),
-          chaveLocalizacaoOrigem: ativo?.chaveLocalizacao,
-          chaveResponsavelOrigem: ativo?.chaveResponsavel,
-          chaveLocalizacaoDestino:
-            dataToUpdate.chaveLocalizacao ?? ativo?.chaveLocalizacao,
-          chaveResponsavelDestino:
-            dataToUpdate.chaveResponsavel ?? ativo?.chaveResponsavel,
+          chaveLocalizacaoOrigem: ativo.chaveLocalizacao,
+          chaveResponsavelOrigem: ativo.chaveResponsavel,
+          chaveLocalizacaoDestino: chaveLocalizacao,
+          chaveResponsavelDestino: chaveResponsavel,
         },
       });
     } catch (err) {
