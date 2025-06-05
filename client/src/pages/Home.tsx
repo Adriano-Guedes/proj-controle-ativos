@@ -2,24 +2,36 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Ativo } from '../interfaces/Ativo';
+import { Usuario } from '../interfaces/Usuario';
 
-interface Ativo {
-    id: number;
-    nome: string;
-    status: string;
-}
 
 const Home: React.FC = () => {
     const [ativos, setAtivos] = useState<Ativo[]>([]);
-    const { logout } = useAuth();
+    const [usuarioLogado, setUsuarioLogado] = useState<Usuario>()
+    const { usuario, logout } = useAuth();
     const navigate = useNavigate();
+    const [filtros, setFiltros] = useState({
+        nome: "",
+        codInterno: "",
+        status: 0,
+        chaveResponsavel: 0,
+        chaveLocalizacao: 0
+    });
+
 
     useEffect(() => {
         const fetchAtivos = async () => {
             try {
-                const { data } = await api.post('/ativos/lista');
-                console.log(data)
-                setAtivos(data);
+                await api.post('/ativos/lista', filtros).then((response) => {
+                    setAtivos(response.data.data);
+                    console.log("dados:", response.data.data);
+                });
+
+                await api.get(`/usuarios/${usuario?.id}`).then((response) => {
+                    setUsuarioLogado(response.data.data);
+                    console.log("dados usuario:", response.data.data);
+                });
             } catch (error) {
                 console.error('Erro ao buscar ativos', error);
             }
@@ -35,26 +47,13 @@ const Home: React.FC = () => {
 
     return (
         <div>
-            <h1>Ativos</h1>
-            <button onClick={handleLogout}>Sair</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ativos.map(ativo => (
-                        <tr key={ativo.id}>
-                            <td>{ativo.id}</td>
-                            <td>{ativo.nome}</td>
-                            <td>{ativo.status}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {ativos.map((ativo) => (
+                <div key={ativo.id}>
+                    <h3>{ativo.nome}</h3>
+                    <p>Responsável: {ativo.responsavel?.nome ?? ""}</p>
+                    <p>Localização: {ativo.localizacao?.endereco ?? ""}</p>
+                </div>
+            ))}
         </div>
     );
 };

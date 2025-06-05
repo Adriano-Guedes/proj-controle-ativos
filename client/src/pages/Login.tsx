@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
+import { Usuario } from '../interfaces/Usuario';
 
 const Login: React.FC = () => {
     const [loginInfo, setLoginInfo] = useState('');
@@ -13,8 +14,12 @@ const Login: React.FC = () => {
         e.preventDefault();
         try {
             const response = await api.post('/login', { login: loginInfo, senha });
-            const token = response.data.data.token;
-            login(token);
+            
+            const token: string = response.data.data.token;
+            const usuario: Usuario = response.data.data.usuario;
+
+            login(token, usuario);  // Agora passando token e usuario
+
             navigate('/home');
         } catch (error) {
             console.error(error);
@@ -24,8 +29,20 @@ const Login: React.FC = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" value={loginInfo} onChange={e => setLoginInfo(e.target.value)} placeholder="Login ou Email" />
-            <input type="password" value={senha} onChange={e => setSenha(e.target.value)} placeholder="Senha" />
+            <input
+                type="text"
+                value={loginInfo}
+                onChange={e => setLoginInfo(e.target.value)}
+                placeholder="Login ou Email"
+                required
+            />
+            <input
+                type="password"
+                value={senha}
+                onChange={e => setSenha(e.target.value)}
+                placeholder="Senha"
+                required
+            />
             <button type="submit">Entrar</button>
         </form>
     );

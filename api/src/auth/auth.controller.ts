@@ -37,7 +37,13 @@ export const login = async (req: Request, res: Response) => {
 
         const token = generateToken({ userId: user.id.toString() });
 
-        res.json({ data: { token } });
+        const usuario = {
+            id: user.id,
+            nome: user.nome,
+            email: user.email
+        };
+
+        return res.status(200).json({ data: { token, usuario } });
 
     } catch (e) {
         res.status(500).json({ e });

@@ -14,7 +14,7 @@ const dbHistoricoMovimentacao = new PrismaClient().historicoAlocacao;
 export const getAllAtivos = async (req: Request, res: Response) => {
   try {
     const filters: any = {};
-
+    
     if (req.body.nome) {
       filters.nome = {
         contains: req.body.nome.toString(),
