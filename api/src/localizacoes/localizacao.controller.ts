@@ -20,7 +20,7 @@ export const getAllLocalizacoes = async (req: Request, res: Response) => {
         endereco: "asc",
       },
     });
-    res.status(200).json({ data: localizacoes });
+    res.status(200).json(localizacoes);
   } catch (e) {
     res.status(500).json({ e });
   }
@@ -38,7 +38,7 @@ export const getLocalizacaoById = async (req: Request, res: Response) => {
       .status(200)
       .json(
         localizacao
-          ? { data: localizacao }
+          ? localizacao
           : { mensagem: "Consulta não gerou resultado" }
       );
   } catch (e) {
@@ -67,7 +67,7 @@ export const createLocalizacao = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).json({ data: novaLocalizacao });
+    res.status(201).json(novaLocalizacao);
   } catch (e: any) {
     if (e.code === "P2002") {
       res.status(400).json({
@@ -111,7 +111,7 @@ export const updateLocalizacao = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).json({ data: localizacao });
+    res.status(201).json(localizacao);
   } catch (e: any) {
     if (e.code === "P2025") {
       res.status(400).json({ mensagem: "Registro não encontrado." });

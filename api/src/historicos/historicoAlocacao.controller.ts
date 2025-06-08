@@ -42,10 +42,29 @@ export const getAllHistoricos = async (req: Request, res: Response) => {
     const historicos = await db.findMany({
       where,
       include: {
-        localizacaoOrigem: { select: { endereco: true } },
-        responsavelOrigem: { select: { nome: true } },
-        localizacaoDestino: { select: { endereco: true } },
-        responsavelDestino: { select: { nome: true } },
+        ativo: true,
+        localizacaoOrigem: true,
+        responsavelOrigem: {
+          select: {
+            id: true,
+            nome: true,
+            email: true,
+            login: true,
+            chaveCargo: true,
+            cargo: true,
+          },
+        },
+        localizacaoDestino: true,
+        responsavelDestino: {
+          select: {
+            id: true,
+            nome: true,
+            email: true,
+            login: true,
+            chaveCargo: true,
+            cargo: true,
+          },
+        },
       },
       orderBy: { data: "desc" },
     });
@@ -54,13 +73,12 @@ export const getAllHistoricos = async (req: Request, res: Response) => {
       return res.status(200).json({ mensagem: "Consulta não gerou resultado" });
     }
 
-    return res.status(200).json({ data: historicos });
+    return res.status(200).json(historicos);
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: "Erro ao buscar históricos" });
   }
 };
-
 
 // Get historico by id
 export const getHistoricoById = async (req: Request, res: Response) => {
@@ -70,17 +88,28 @@ export const getHistoricoById = async (req: Request, res: Response) => {
         chaveAtivo: parseInt(req.params.id),
       },
       include: {
-        localizacaoOrigem: {
-          select: { endereco: true },
-        },
+        ativo: true,
+        localizacaoOrigem: true,
         responsavelOrigem: {
-          select: { nome: true },
+          select: {
+            id: true,
+            nome: true,
+            email: true,
+            login: true,
+            chaveCargo: true,
+            cargo: true,
+          },
         },
-        localizacaoDestino: {
-          select: { endereco: true },
-        },
+        localizacaoDestino: true,
         responsavelDestino: {
-          select: { nome: true },
+          select: {
+            id: true,
+            nome: true,
+            email: true,
+            login: true,
+            chaveCargo: true,
+            cargo: true,
+          },
         },
       },
       orderBy: {
@@ -92,7 +121,7 @@ export const getHistoricoById = async (req: Request, res: Response) => {
       .status(200)
       .json(
         historico
-          ? { data: historico }
+          ? historico
           : { mensagem: "Consulta não gerou resultado" }
       );
   } catch (e) {

@@ -78,44 +78,6 @@ export const getUsuarioById = async (req: Request, res: Response) => {
   }
 };
 
-// Create usuario
-export const createUsuario = async (req: Request, res: Response) => {
-  try {
-    const newUsuario = plainToInstance(CreateUsuarioDto, req.body);
-    const erros = await validate(newUsuario);
-
-    if (erros.length > 0) {
-      const mensagens = erros.map(e => Object.values(e.constraints ?? {})).flat();
-      res.status(400).json({ erros: mensagens });
-      return;
-    }
-
-    const usuarios = await db.findMany({
-      where: { OR: [{ email: newUsuario.email }, { login: newUsuario.login }] },
-    });
-    if (usuarios.length > 0) {
-      res.status(400).json({ mensagem: "Email ou login já existente, tente outro." });
-      return;
-    }
-
-    const hash = await bcrypt.hash(newUsuario.senha, 10);
-
-    //const comparacao = await bcrypt.compare(newUsuario.senha,hash); 
-    const novoUsuario = await db.create({
-      data: {
-        nome: newUsuario.nome,
-        email: newUsuario.email,
-        login: newUsuario.login,
-        senha: hash,
-      },
-    });
-  
-    res.status(201).json({ data: novoUsuario });
-  } catch (e) {
-    res.status(500).json({ e });
-  }
-};
-
 // Update usuario
 export const updateUsuario = async (req: Request, res: Response) => {
   try {
@@ -138,7 +100,12 @@ export const updateUsuario = async (req: Request, res: Response) => {
       where: {
         id: req.params.id,
       },
-      include: {
+      select: {
+        id: true,
+        nome: true,
+        email: true,
+        login: true,
+        chaveCargo: true,
         cargo: true,
       },
     });

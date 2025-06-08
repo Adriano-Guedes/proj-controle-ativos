@@ -3,7 +3,6 @@ import { UserProfile } from "../models/User";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loginAPI, registerAPI } from "../services/AuthService";
-import { login } from "../services/auth";
 import { toast } from "react-toastify";
 import React from "react";
 import axios from "axios";
@@ -51,25 +50,27 @@ export const UserProvider = ({ children }: Props) => {
                 setToken(res?.data.token!);
                 setUser(userObj!);
                 toast.success("Bem vindo!");
-                navigate("/home");
+                navigate("/principal");
             }
         }).catch((e) => toast.warning("Erro no servidor!"));
     };
 
     const loginUser = async(login: string, password: string) => {
         await loginAPI(login, password).then((res) => {
+            console.log(res)
             if(res) {
                 localStorage.setItem("token", res?.data.token);
                 const userObj = {
                     id: res?.data.id,
                     nome: res?.data.nome,
-                    email: res?.data.email
+                    email: res?.data.email,
+                    cargo: res?.data.cargo,
                 }
                 localStorage.setItem("user", JSON.stringify(userObj));
                 setToken(res?.data.token!);
                 setUser(userObj!);
                 toast.success("Bem vindo!");
-                navigate("/home");
+                navigate("/principal");
             }
         }).catch((e) => toast.warning("Erro no servidor!"));
     };
@@ -84,7 +85,7 @@ export const UserProvider = ({ children }: Props) => {
         localStorage.removeItem("user");
         setUser(null);
         setToken("");
-        navigate("/login");
+        navigate("/");
     }
 
     return(
@@ -94,4 +95,4 @@ export const UserProvider = ({ children }: Props) => {
     )
 };
 
-export const userAuth = () => React.useContext(UserContext);
+export const useAuth = () => React.useContext(UserContext);

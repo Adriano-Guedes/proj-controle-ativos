@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
 import { CreateAtivoDto } from "./dto/create-ativo.dto";
+import { login } from "../auth/auth.controller";
 
 const db = new PrismaClient().ativo;
 const dbLocalizacao = new PrismaClient().localizacao;
@@ -14,7 +15,7 @@ const dbHistoricoMovimentacao = new PrismaClient().historicoAlocacao;
 export const getAllAtivos = async (req: Request, res: Response) => {
   try {
     const filters: any = {};
-    
+
     if (req.body.nome) {
       filters.nome = {
         contains: req.body.nome.toString(),
@@ -23,8 +24,8 @@ export const getAllAtivos = async (req: Request, res: Response) => {
 
     if (req.body.codInterno) {
       filters.codInterno = {
-        contains: req.body.codInterno.toString()
-      }
+        contains: req.body.codInterno.toString(),
+      };
     }
 
     if (req.body.status) {
@@ -32,21 +33,26 @@ export const getAllAtivos = async (req: Request, res: Response) => {
     }
 
     if (req.body.chaveResponsavel) {
-      filters.chaveResponsavel = parseInt(
-        req.body.chaveResponsavel.toString()
-      );
+      filters.chaveResponsavel = parseInt(req.body.chaveResponsavel.toString());
     }
 
     if (req.body.chaveLocalizacao) {
-      filters.chaveLocalizacao = parseInt(
-        req.body.chaveLocalizacao.toString()
-      );
+      filters.chaveLocalizacao = parseInt(req.body.chaveLocalizacao.toString());
     }
 
     const ativos = await db.findMany({
       where: filters,
       include: {
-        responsavel: true,
+        responsavel: {
+          select: {
+            id: true,
+            nome: true,
+            email: true,
+            login: true,
+            chaveCargo: true,
+            cargo: true
+          },
+        },
         localizacao: true,
       },
       orderBy: {
@@ -54,7 +60,11 @@ export const getAllAtivos = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json(ativos ? { data: ativos } : { mensagem: "Consulta não gerou resultado" });
+    res
+      .status(200)
+      .json(
+        ativos ? ativos : { mensagem: "Consulta não gerou resultado" }
+      );
   } catch (e) {
     res.status(500).json({ error: e });
   }
@@ -68,14 +78,23 @@ export const getAtivoById = async (req: Request, res: Response) => {
         id: parseInt(req.params.id),
       },
       include: {
-        responsavel: true,
+        responsavel: {
+          select: {
+            id: true,
+            nome: true,
+            email: true,
+            login: true,
+            chaveCargo: true,
+            cargo: true
+          },
+        },
         localizacao: true,
       },
     });
     res
       .status(200)
       .json(
-        ativo ? { data: ativo } : { mensagem: "Consulta não gerou resultado" }
+        ativo ? ativo : { mensagem: "Consulta não gerou resultado" }
       );
   } catch (e) {
     res.status(500).json({ e });
@@ -110,7 +129,7 @@ export const createAtivo = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).json({ data: novoAtivo });
+    res.status(201).json(novoAtivo);
   } catch (e) {
     res.status(500).json({ e });
   }
@@ -153,7 +172,7 @@ export const updateAtivo = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).json({ data: ativos });
+    res.status(201).json(ativos);
   } catch (e) {
     res.status(500).json({ e });
   }
@@ -182,12 +201,14 @@ export const moveAtivo = async (req: Request, res: Response) => {
 
     if (isNaN(id)) {
       res.status(400).json({ mensagem: "ID inválido" });
-      return
+      return;
     }
 
     if (!chaveResponsavel && !chaveLocalizacao) {
-      res.status(400).json({ mensagem: "Nenhuma movimentação a ser realizada" });
-      return
+      res
+        .status(400)
+        .json({ mensagem: "Nenhuma movimentação a ser realizada" });
+      return;
     }
 
     if (chaveLocalizacao) {
@@ -196,9 +217,9 @@ export const moveAtivo = async (req: Request, res: Response) => {
       });
       if (!localizacao) {
         res.status(404).json({ mensagem: "Localização não encontrada" });
-        return
+        return;
       }
-    }else{
+    } else {
       chaveLocalizacao = null;
     }
 
@@ -208,9 +229,9 @@ export const moveAtivo = async (req: Request, res: Response) => {
       });
       if (!usuario) {
         res.status(404).json({ mensagem: "Usuário não encontrado" });
-        return
+        return;
       }
-    }else{
+    } else {
       chaveResponsavel = null;
     }
 
@@ -221,7 +242,7 @@ export const moveAtivo = async (req: Request, res: Response) => {
 
     if (!ativo) {
       res.status(404).json({ mensagem: "Ativo não encontrado" });
-      return
+      return;
     }
 
     const updateData: any = {};
