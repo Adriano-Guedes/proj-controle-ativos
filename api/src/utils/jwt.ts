@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || '12345';
-const JWT_EXPIRATION = '1h'; // 1 hora de validade
+const JWT_EXPIRATION = '720h';
 
 export interface JwtPayload {
   userId: string;

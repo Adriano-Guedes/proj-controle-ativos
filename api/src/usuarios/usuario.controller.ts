@@ -41,7 +41,7 @@ export const getAllUsuarios = async (req: Request, res: Response) => {
         nome: "asc",
       },
     });
-    res.status(200).json({ data: usuarios });
+    res.status(200).json(usuarios);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: e });
@@ -71,7 +71,7 @@ export const getUsuarioById = async (req: Request, res: Response) => {
       res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
 
-    res.status(200).json({ data: usuario });
+    res.status(200).json(usuario);
   } catch (e) {
     console.error(e);
     res.status(500).json({ e });
@@ -110,7 +110,7 @@ export const updateUsuario = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(200).json({ data: usuario });
+    res.status(200).json(usuario);
   } catch (e) {
     console.error(e);
     res.status(500).json({ erro: e });

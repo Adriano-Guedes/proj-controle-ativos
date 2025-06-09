@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getAllAtivos, getAtivoById, createAtivo, updateAtivo, deleteAtivo, moveAtivo } from "./ativo.controller";
+import { getAllAtivos, getAtivosByUsuario, getAtivoById, createAtivo, updateAtivo, deleteAtivo, moveAtivo } from "./ativo.controller";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
 const ativoRouter = Router();
@@ -8,6 +8,7 @@ const ativoRouter = Router();
 ativoRouter.use(authMiddleware);
 
 ativoRouter.post("/lista", getAllAtivos);
+ativoRouter.post("/listaByUsuario", getAtivosByUsuario);
 ativoRouter.get("/:id", getAtivoById);
 ativoRouter.post("/", createAtivo);
 ativoRouter.put("/:id", updateAtivo);

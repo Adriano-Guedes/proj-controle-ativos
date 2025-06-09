@@ -5,13 +5,14 @@ export type UserProfileToken = {
     nome: string;
     email: string;
     token: string;
-    cargo: number;
+    chaveCargo: number;
 };
 
 export type UserProfile = {
     id: string;
     nome: string;
     email: string;
+    chaveCargo: number;
 };
 
 export type UsuarioGet = {
@@ -28,4 +29,11 @@ export type UsuarioUpdate = {
     nome: string;
     email: string;
     login: string;
+};
+
+export type UsuarioLogado = {
+    id: string;
+    nome: string;
+    email: string;
+    chaveCargo: number;
 };

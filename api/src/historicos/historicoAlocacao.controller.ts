@@ -10,12 +10,17 @@ const db = new PrismaClient().historicoAlocacao;
 // Get all históricos
 export const getAllHistoricos = async (req: Request, res: Response) => {
   try {
+    const chaveAtivo = req.body.chaveAtivo;
     const chaveResponsavel = req.body.chaveResponsavel;
     const chaveLocalizacao = req.body.chaveLocalizacao;
 
     const where: any = {};
 
     const andFilters: any[] = [];
+
+    if (chaveAtivo) {
+      andFilters.push({ chaveAtivo: chaveAtivo });
+    }
 
     if (chaveResponsavel) {
       andFilters.push({
@@ -120,9 +125,7 @@ export const getHistoricoById = async (req: Request, res: Response) => {
     res
       .status(200)
       .json(
-        historico
-          ? historico
-          : { mensagem: "Consulta não gerou resultado" }
+        historico ? historico : { mensagem: "Consulta não gerou resultado" }
       );
   } catch (e) {
     res.status(500).json({ e });

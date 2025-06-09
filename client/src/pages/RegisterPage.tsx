@@ -40,69 +40,86 @@ const RegisterPage = (props: Props) => {
     };
 
     return (
-        <div className="d-flex align-items-center py-4 bg-body-tertiary container">
-            <div className="form-signin w-50 m-auto">
-                <form onSubmit={handleSubmit(handleRegister)}>
-                    <h1 className="h3 mb-3 fw-normal">Criar conta</h1>
+        <div
+            className="d-flex justify-content-center align-items-center vh-100"
+            style={{
+                backgroundImage: "url('/background.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
+        >
+            <div className="card p-3 shadow w-100" style={{ maxWidth: "400px", backgroundColor: "rgb(255, 255, 255)" }}>
+                <div className="form-signin w-75 m-auto">
+                    <form onSubmit={handleSubmit(handleRegister)}>
+                        <h1 className="h3 mb-3 fw-normal text-center">Criar conta</h1>
 
-                    <div className="form-floating mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="floatingInput"
-                            placeholder="Nome"
-                            {...register("nome")}
-                        />
-                        <label htmlFor="floatingInput">Nome</label>
-                        {errors.nome && <p className="text-danger mt-1">{errors.nome.message}</p>}
-                    </div>
+                        <div className="form-floating mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="floatingInput"
+                                placeholder="Nome"
+                                {...register("nome")}
+                            />
+                            <label htmlFor="floatingInput">Nome</label>
+                            {errors.nome && <p className="text-danger mt-1">{errors.nome.message}</p>}
+                        </div>
 
-                    <div className="form-floating mb-3">
-                        <input
-                            type="email"
-                            className="form-control"
-                            id="floatingInput"
-                            placeholder="Email"
-                            {...register("email")}
-                        />
-                        <label htmlFor="floatingInput">Email</label>
-                        {errors.email && <p className="text-danger mt-1">{errors.email.message}</p>}
-                    </div>
+                        <div className="form-floating mb-3">
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="floatingInput"
+                                placeholder="Email"
+                                {...register("email")}
+                            />
+                            <label htmlFor="floatingInput">Email</label>
+                            {errors.email && <p className="text-danger mt-1">{errors.email.message}</p>}
+                        </div>
 
-                    <div className="form-floating mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="floatingInput"
-                            placeholder="Login"
-                            {...register("login")}
-                        />
-                        <label htmlFor="floatingInput">Login</label>
-                        {errors.login && <p className="text-danger mt-1">{errors.login.message}</p>}
-                    </div>
+                        <div className="form-floating mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="floatingInput"
+                                placeholder="Login"
+                                {...register("login")}
+                            />
+                            <label htmlFor="floatingInput">Login</label>
+                            {errors.login && <p className="text-danger mt-1">{errors.login.message}</p>}
+                        </div>
 
-                    <div className="form-floating mb-3">
-                        <input
-                            type="password"
-                            className="form-control"
-                            id="floatingPassword"
-                            placeholder="Senha"
-                            {...register("senha")}
-                        />
-                        <label htmlFor="floatingPassword">Senha</label>
-                        {errors.senha && <p className="text-danger mt-1">{errors.senha.message}</p>}
-                    </div>
+                        <div className="form-floating mb-3">
+                            <input
+                                type="password"
+                                className="form-control"
+                                id="floatingPassword"
+                                placeholder="Senha"
+                                {...register("senha")}
+                            />
+                            <label htmlFor="floatingPassword">Senha</label>
+                            {errors.senha && <p className="text-danger mt-1">{errors.senha.message}</p>}
+                        </div>
 
-                    <button className="btn btn-primary w-100 py-2 mb-2" type="submit">
-                        Cadastrar
-                    </button>
+                        <div className="row">
+                            <div className="col-6">
+                                <button className="btn btn-primary w-100 py-2 mb-4" type="submit">
+                                    Criar
+                                </button>
+                            </div>
+                            <div className="col-6">
+                                <button className="btn btn-danger w-100 py-2 mb-4" type="button" onClick={handleCancelar}>
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
 
-                    <button className="btn btn-danger w-100 py-2" type="button" onClick={handleCancelar}>
-                        Cancelar
-                    </button>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
+
+
     );
 
 };

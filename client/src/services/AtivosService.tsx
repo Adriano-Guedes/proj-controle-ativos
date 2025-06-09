@@ -63,10 +63,25 @@ export const getAtivo = async (id: number) => {
     }
 }
 
-export const getListaAtivo = async (filtro: string) => {
+export const getListaAtivo = async (nome: string = "", codInterno: string = "", status: string = "", chaveResponsavel: string = "", chaveLocalizacao: number = 0) => {
     try {
         const response = await axios.post<AtivoGet[]>(api + "/lista", {
-            nome: filtro,
+            nome: nome ?? "",
+            codInterno: codInterno ?? "",
+            status: status ?? "",
+            chaveResponsavel: chaveResponsavel ?? "",
+            chaveLocalizacao: chaveLocalizacao ?? 0
+        });
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+};
+
+export const getListaAtivoByUsuario = async (filtro: string) => {
+    try {
+        const response = await axios.post<AtivoGet[]>(api + "/listaByUsuario", {
+            chaveResponsavel: filtro,
         });
         return response.data;
     } catch (error) {

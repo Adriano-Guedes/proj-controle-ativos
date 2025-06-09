@@ -14,12 +14,12 @@ export const handleError = (error: any) => {
                 toast.warning(err.data.erros[e][0]);
             }
         }else if (err?.data){
-            toast.warning(err.data);
+            toast.warning(err.data.message);
         }else if (err?.status == 401){
             toast.warning("Não autorizado");
             window.history.pushState({}, "LoginPage", "/login")
         }else if (err){
-            toast.warning(err?.data);
+            toast.warning(err?.data.message);
         }
     }
 };

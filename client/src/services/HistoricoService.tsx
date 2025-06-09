@@ -14,11 +14,12 @@ export const getHistorico = async (id: number) => {
     }
 }
 
-export const getListaHistorico = async (chaveUsuario: string, chaveLocalizacao: number) => {
+export const getListaHistorico = async (chaveUsuario: string, chaveLocalizacao: number, chaveAtivo: number) => {
     try {
         const response = await axios.post<HistoricoGet[]>(api + "/", {
             chaveResponsavel: chaveUsuario,
-            chaveLocalizacao: chaveLocalizacao
+            chaveLocalizacao: chaveLocalizacao,
+            chaveAtivo: chaveAtivo
         });
         return response.data;
     } catch (error) {

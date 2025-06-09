@@ -33,11 +33,49 @@ export const getAllAtivos = async (req: Request, res: Response) => {
     }
 
     if (req.body.chaveResponsavel) {
-      filters.chaveResponsavel = parseInt(req.body.chaveResponsavel.toString());
+      filters.chaveResponsavel = req.body.chaveResponsavel;
     }
 
     if (req.body.chaveLocalizacao) {
-      filters.chaveLocalizacao = parseInt(req.body.chaveLocalizacao.toString());
+      filters.chaveLocalizacao = req.body.chaveLocalizacao;
+    }
+
+    const ativos = await db.findMany({
+      where: filters,
+      include: {
+        responsavel: {
+          select: {
+            id: true,
+            nome: true,
+            email: true,
+            login: true,
+            chaveCargo: true,
+            cargo: true
+          },
+        },
+        localizacao: true,
+      },
+      orderBy: {
+        nome: "asc",
+      },
+    });
+
+    res
+      .status(200)
+      .json(
+        ativos ? ativos : { mensagem: "Consulta não gerou resultado" }
+      );
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+};
+
+export const getAtivosByUsuario = async (req: Request, res: Response) => {
+  try {
+    const filters: any = {};
+
+    if (req.body.chaveResponsavel) {
+      filters.chaveResponsavel = req.body.chaveResponsavel;
     }
 
     const ativos = await db.findMany({

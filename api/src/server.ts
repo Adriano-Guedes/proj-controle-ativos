@@ -13,9 +13,8 @@ const app = express();
 
 app.use(express.json());
 
-// ✅ Habilitar CORS
 app.use(cors({
-  origin: 'http://localhost:5173',  // ou outra porta onde o React está rodando
+  origin: 'http://localhost:5173',
   credentials: true
 }));
 

@@ -1,9 +1,12 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import ProtectedRoute from "./ProtectedRoute";
 import RegisterPage from "../pages/RegisterPage";
+import AtivosPage from "../pages/AtivosPage";
+import UsuariosPage from "../pages/UsuarioPage";
+import HistoricoPage from "../pages/HistoricoPage";
 
 export const router = createBrowserRouter([
     {
@@ -20,22 +23,31 @@ export const router = createBrowserRouter([
                     </ProtectedRoute>
                 ),
             },
-            //   { path: "design-guide", element: <DesignGuide /> },
-            //   {
-            //     path: "company/:ticker",
-            //     element: (
-            //       <ProtectedRoute>
-            //         <CompanyPage />
-            //       </ProtectedRoute>
-            //     ),
-            //     children: [
-            //       { path: "company-profile", element: <CompanyProfile /> },
-            //       { path: "income-statement", element: <IncomeStatement /> },
-            //       { path: "balance-sheet", element: <BalanceSheet /> },
-            //       { path: "cashflow-statement", element: <CashflowStatement /> },
-            //       { path: "historical-dividend", element: <HistoricalDividend /> },
-            //     ],
-            //   },
+            {
+                path: "ativos",
+                element: (
+                    <ProtectedRoute>
+                        <AtivosPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "usuarios",
+                element: (
+                    <ProtectedRoute>
+                        <UsuariosPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "historicos",
+                element: (
+                    <ProtectedRoute>
+                        <HistoricoPage />
+                    </ProtectedRoute>
+                ),
+            },
+            { path: "*", element: <Navigate to="/" replace /> },
         ],
     },
 ]);

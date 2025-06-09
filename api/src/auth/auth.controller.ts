@@ -40,9 +40,9 @@ export const login = async (req: Request, res: Response) => {
     let id = user.id;
     let nome = user.nome;
     let email = user.email;
-    let cargo = user.chaveCargo;
+    let chaveCargo = user.chaveCargo;
 
-    res.status(200).json({ token, id, nome, email, cargo });
+    res.status(200).json({ token, id, nome, email, chaveCargo });
   } catch (e) {
     res.status(500).json({ e });
     res.status(500).json({ message: "Erro interno do servidor." });
@@ -70,7 +70,7 @@ export const createUsuario = async (req: Request, res: Response) => {
     if (usuarios.length > 0) {
       res
         .status(400)
-        .json({ mensagem: "Email ou login já existente, tente outro." });
+        .json({ message: "Email ou login já registrados, tente outro." });
       return;
     }
 
@@ -91,9 +91,9 @@ export const createUsuario = async (req: Request, res: Response) => {
     let id = novoUsuario.id;
     let nome = novoUsuario.nome;
     let email = novoUsuario.email;
-    let cargo = novoUsuario.chaveCargo;
+    let chaveCargo = novoUsuario.chaveCargo;
 
-    res.status(200).json({ token, id, nome, email, cargo });
+    res.status(200).json({ token, id, nome, email, chaveCargo });
   } catch (e) {
     res.status(500).json({ e });
   }
