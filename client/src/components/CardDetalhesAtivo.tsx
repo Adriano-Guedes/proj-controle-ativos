@@ -1,7 +1,6 @@
 import { AtivoGet } from "../models/Ativo";
 import { FaComputer } from "react-icons/fa6";
 import { formatarData, formatarMoeda } from "../helpers/Formatadores";
-import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { MdModeEdit } from "react-icons/md";
 import { TbTransfer } from "react-icons/tb";
@@ -14,11 +13,11 @@ type Props = {
     pagina: number;
     fecharDetalhamentoAtivo: () => void;
     abrirModalEditAtivo: () => void;
-    abrirModalMoverAtivo: () => void;
-    abrirModalExcluirAtivo: () => void;
+    abrirModalMoverAtivo: (id: number) => void;
+    excluirAtivo: (id: number) => void;
 };
 
-const CardDetalhesAtivo = ({ ativo, pagina, fecharDetalhamentoAtivo, abrirModalEditAtivo, abrirModalMoverAtivo, abrirModalExcluirAtivo }: Props) => {
+const CardDetalhesAtivo = ({ ativo, pagina, fecharDetalhamentoAtivo, abrirModalEditAtivo, abrirModalMoverAtivo, excluirAtivo }: Props) => {
     if (!ativo) return null;
 
     return (
@@ -28,6 +27,7 @@ const CardDetalhesAtivo = ({ ativo, pagina, fecharDetalhamentoAtivo, abrirModalE
                     <span className="fs-4">Detalhes Ativo</span>
                 </strong>
             </div>
+            <hr className="my-3 w-75 mx-auto" />
             <div className="row">
                 <div className="col-11">
                     <div className="row align-items-center">
@@ -152,7 +152,7 @@ const CardDetalhesAtivo = ({ ativo, pagina, fecharDetalhamentoAtivo, abrirModalE
                                     justifyContent: "center",
                                 }}
                                 title="Mover Ativo"
-                                onClick={fecharDetalhamentoAtivo}
+                                onClick={() => abrirModalMoverAtivo(ativo.id)}
                             >
                                 <TbTransfer size={20} />
                             </button>
@@ -167,7 +167,7 @@ const CardDetalhesAtivo = ({ ativo, pagina, fecharDetalhamentoAtivo, abrirModalE
                                     justifyContent: "center",
                                 }}
                                 title="Excluir Ativo"
-                                onClick={fecharDetalhamentoAtivo}
+                                onClick={() => excluirAtivo(ativo.id)}
                             >
                                 <FaTrashAlt size={20} />
                             </button>

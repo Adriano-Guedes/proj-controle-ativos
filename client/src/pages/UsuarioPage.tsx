@@ -48,7 +48,7 @@ const UsuariosPage = (props: Props) => {
 
             {/* Main Content Area */}
             <div className='flex-grow-1'>
-                <div className="m-5 card">
+                <div className="m-5 card" style={{ height: "780px", overflowY: "auto", overflowX: "hidden" }}>
                     <div className="row">
                         <div className="col-12">
                             <div>
@@ -56,6 +56,7 @@ const UsuariosPage = (props: Props) => {
                                     <span className="fs-4">Usuários</span>
                                 </strong>
                             </div>
+                            <hr className="my-3 w-75 mx-auto" />
                             <div className="input-group p-3">
                                 <span className="input-group-text">Filtro</span>
                                 <input

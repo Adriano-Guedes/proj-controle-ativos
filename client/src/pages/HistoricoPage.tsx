@@ -86,7 +86,7 @@ const HistoricoPage = (props: Props) => {
 
             {/* Main Content Area */}
             <div className='flex-grow-1'>
-                <div className="m-5 card" style={{ maxHeight: "1000px", overflowY: "auto", overflowX: "hidden" }}>
+                <div className="m-5 card" style={{ height: "780px", overflowY: "auto", overflowX: "hidden" }}>
                     <div className="row">
                         <div className="col-12">
                             <div>
@@ -94,6 +94,7 @@ const HistoricoPage = (props: Props) => {
                                     <span className="fs-4">Histórico de Movimentações</span>
                                 </strong>
                             </div>
+                            <hr className="my-3 w-75 mx-auto" />
                             <div className="row px-4 justify-content-end">
                                 <div className="col-12 col-md-6 col-lg-4 p-3">
                                     <div className="input-group border border-1 rounded border-black">

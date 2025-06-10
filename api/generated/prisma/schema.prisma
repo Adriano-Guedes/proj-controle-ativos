@@ -69,7 +69,7 @@ model HistoricoAlocacao {
   id   Int      @id @default(autoincrement())
   data DateTime
 
-  ativo      Ativo @relation(name: "NomeAtivo", fields: [chaveAtivo], references: [id])
+  ativo      Ativo @relation(name: "NomeAtivo", fields: [chaveAtivo], references: [id], onDelete: Cascade)
   chaveAtivo Int
 
   localizacaoOrigem      Localizacao? @relation(name: "OrigemLocalizacao", fields: [chaveLocalizacaoOrigem], references: [id])

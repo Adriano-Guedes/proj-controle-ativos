@@ -33,6 +33,8 @@ model Ativo {
   historicosAtivo   HistoricoAlocacao[] @relation(name: "NomeAtivo")
 }
 
+
+
 model Usuario{
   id            String  @id @default(uuid())
   nome          String  @db.VarChar(100)
@@ -69,7 +71,7 @@ model HistoricoAlocacao {
   id                      Int       @id @default(autoincrement())
   data                    DateTime
 
-  ativo                   Ativo       @relation(name: "NomeAtivo", fields: [chaveAtivo], references: [id])
+  ativo                   Ativo     @relation(name: "NomeAtivo", fields: [chaveAtivo], references: [id], onDelete: Cascade)
   chaveAtivo              Int
 
   localizacaoOrigem       Localizacao? @relation(name: "OrigemLocalizacao", fields: [chaveLocalizacaoOrigem], references: [id])
@@ -84,3 +86,4 @@ model HistoricoAlocacao {
   responsavelDestino      Usuario?     @relation(name: "DestinoResponsavel", fields: [chaveResponsavelDestino], references: [id])
   chaveResponsavelDestino String?
 }
+

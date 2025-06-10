@@ -50,7 +50,7 @@ export const getAllAtivos = async (req: Request, res: Response) => {
             email: true,
             login: true,
             chaveCargo: true,
-            cargo: true
+            cargo: true,
           },
         },
         localizacao: true,
@@ -62,9 +62,7 @@ export const getAllAtivos = async (req: Request, res: Response) => {
 
     res
       .status(200)
-      .json(
-        ativos ? ativos : { mensagem: "Consulta não gerou resultado" }
-      );
+      .json(ativos ? ativos : { message: "Consulta não gerou resultado" });
   } catch (e) {
     res.status(500).json({ error: e });
   }
@@ -88,7 +86,7 @@ export const getAtivosByUsuario = async (req: Request, res: Response) => {
             email: true,
             login: true,
             chaveCargo: true,
-            cargo: true
+            cargo: true,
           },
         },
         localizacao: true,
@@ -100,9 +98,7 @@ export const getAtivosByUsuario = async (req: Request, res: Response) => {
 
     res
       .status(200)
-      .json(
-        ativos ? ativos : { mensagem: "Consulta não gerou resultado" }
-      );
+      .json(ativos ? ativos : { message: "Consulta não gerou resultado" });
   } catch (e) {
     res.status(500).json({ error: e });
   }
@@ -123,7 +119,7 @@ export const getAtivoById = async (req: Request, res: Response) => {
             email: true,
             login: true,
             chaveCargo: true,
-            cargo: true
+            cargo: true,
           },
         },
         localizacao: true,
@@ -131,9 +127,7 @@ export const getAtivoById = async (req: Request, res: Response) => {
     });
     res
       .status(200)
-      .json(
-        ativo ? ativo : { mensagem: "Consulta não gerou resultado" }
-      );
+      .json(ativo ? ativo : { message: "Consulta não gerou resultado" });
   } catch (e) {
     res.status(500).json({ e });
   }
@@ -143,8 +137,8 @@ export const getAtivoById = async (req: Request, res: Response) => {
 export const createAtivo = async (req: Request, res: Response) => {
   try {
     const newAtivo = plainToInstance(CreateAtivoDto, req.body);
+    console.log(newAtivo);
     const erros = await validate(newAtivo);
-
     if (erros.length > 0) {
       const mensagens = erros
         .map((e) => Object.values(e.constraints ?? {}))
@@ -156,16 +150,18 @@ export const createAtivo = async (req: Request, res: Response) => {
     let novoAtivo = await db.create({
       data: {
         nome: newAtivo.nome,
-        codInterno: newAtivo.codInterno,
-        descricao: newAtivo.descricao,
+        codInterno: newAtivo.codInterno === "" ? null : newAtivo.codInterno,
+        descricao: newAtivo.descricao === "" ? null : newAtivo.descricao,
         status: newAtivo.status,
         valor: newAtivo.valor,
         dataAquisicao: new Date(newAtivo.dataAquisicao),
-        observacao: newAtivo.observacao,
+        observacao: newAtivo.observacao === "" ? null : newAtivo.observacao,
         chaveResponsavel: newAtivo.chaveResponsavel,
         chaveLocalizacao: newAtivo.chaveLocalizacao,
       },
     });
+
+    console.log("criado: ", novoAtivo);
 
     res.status(201).json(novoAtivo);
   } catch (e) {
@@ -219,33 +215,39 @@ export const updateAtivo = async (req: Request, res: Response) => {
 // Delete ativo
 export const deleteAtivo = async (req: Request, res: Response) => {
   try {
+    const id = parseInt(req.params.id);
+
+    if (isNaN(id)) {
+      return res.status(400).json({ message: "ID inválido" });
+    }
+
     await db.delete({
-      where: {
-        id: parseInt(req.params.id),
-      },
+      where: { id },
     });
-    res.status(200).json({ mensagem: "Ativo deletado com sucesso" });
-  } catch (e) {
-    res.status(500).json({ e });
+
+    res.status(200).json({ message: "Ativo deletado com sucesso" });
+  } catch (e: any) {
+    console.error("Erro ao deletar ativo:", e);
+    res
+      .status(500)
+      .json({ error: "Erro ao deletar ativo", details: e.message });
   }
 };
 
 // Move ativo
 export const moveAtivo = async (req: Request, res: Response) => {
   try {
+    var id = req.body.id;
     var chaveResponsavel = req.body.chaveResponsavel;
     var chaveLocalizacao = req.body.chaveLocalizacao;
-    const id = parseInt(req.params.id);
 
     if (isNaN(id)) {
-      res.status(400).json({ mensagem: "ID inválido" });
+      res.status(400).json({ message: "ID inválido" });
       return;
     }
 
     if (!chaveResponsavel && !chaveLocalizacao) {
-      res
-        .status(400)
-        .json({ mensagem: "Nenhuma movimentação a ser realizada" });
+      res.status(400).json({ message: "Nenhuma movimentação a ser realizada" });
       return;
     }
 
@@ -254,7 +256,7 @@ export const moveAtivo = async (req: Request, res: Response) => {
         where: { id: chaveLocalizacao },
       });
       if (!localizacao) {
-        res.status(404).json({ mensagem: "Localização não encontrada" });
+        res.status(404).json({ message: "Localização não encontrada" });
         return;
       }
     } else {
@@ -266,7 +268,7 @@ export const moveAtivo = async (req: Request, res: Response) => {
         where: { id: chaveResponsavel },
       });
       if (!usuario) {
-        res.status(404).json({ mensagem: "Usuário não encontrado" });
+        res.status(404).json({ message: "Usuário não encontrado" });
         return;
       }
     } else {
@@ -279,7 +281,7 @@ export const moveAtivo = async (req: Request, res: Response) => {
     });
 
     if (!ativo) {
-      res.status(404).json({ mensagem: "Ativo não encontrado" });
+      res.status(404).json({ message: "Ativo não encontrado" });
       return;
     }
 
@@ -309,9 +311,9 @@ export const moveAtivo = async (req: Request, res: Response) => {
       console.error("Erro ao salvar histórico de movimentação:", err);
     }
 
-    res.status(200).json({ mensagem: "Ativo atualizado com sucesso" });
+    res.status(200).json({ message: "Ativo atualizado com sucesso" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ mensagem: "Erro ao atualizar o ativo", error });
+    res.status(500).json({ message: "Erro ao atualizar o ativo", error });
   }
 };

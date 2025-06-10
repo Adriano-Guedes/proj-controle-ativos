@@ -44,6 +44,7 @@ export const updateAtivo = async (ativo: AtivoUpdate) => {
 export const moveAtivo = async (ativo: AtivoMove) => {
     try {
         const response = await axios.put<AtivoGet>(api + `/alocar/${ativo.id}`, {
+            id: ativo.id,
             chaveResponsavel: ativo.chaveResponsavel,
             chaveLocalizacao: ativo.chaveLocalizacao
         });
@@ -63,11 +64,19 @@ export const getAtivo = async (id: number) => {
     }
 }
 
-export const getListaAtivo = async (nome: string = "", codInterno: string = "", status: string = "", chaveResponsavel: string = "", chaveLocalizacao: number = 0) => {
+export const deleteAtivo = async (id: number) => {
+    try {
+        const response = await axios.delete<AtivoGet>(api + `/${id}`);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+export const getListaAtivo = async (nome: string = "", status: string = "", chaveResponsavel: string = "", chaveLocalizacao: number = 0) => {
     try {
         const response = await axios.post<AtivoGet[]>(api + "/lista", {
             nome: nome ?? "",
-            codInterno: codInterno ?? "",
             status: status ?? "",
             chaveResponsavel: chaveResponsavel ?? "",
             chaveLocalizacao: chaveLocalizacao ?? 0

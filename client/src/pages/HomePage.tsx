@@ -58,12 +58,13 @@ const HomePage = (props: Props) => {
 
             {/* Main Content Area */}
             <div className='flex-grow-1'>
-                <div className="m-5 card" style={{ maxHeight: "900px", overflowY: "auto", overflowX: "hidden" }}>
+                <div className="m-5 card" style={{ height: "780px", overflowY: "auto", overflowX: "hidden" }}>
                     <div>
                         <strong className="d-flex justify-content-center align-items-center p-2 text-black">
                             <span className="fs-4">Meus Ativos</span>
                         </strong>
                     </div>
+                    <hr className="my-3 w-75 mx-auto" />
                     <CardsAtivos ativos={ativos} exibirDetalhesAtivo={exibirDetalhesAtivo} />
                 </div>
             </div>
@@ -83,7 +84,7 @@ const HomePage = (props: Props) => {
                                 fecharDetalhamentoAtivo={fecharDetalhamentoAtivo}
                                 abrirModalEditAtivo={fazerNd}
                                 abrirModalMoverAtivo={fazerNd}
-                                abrirModalExcluirAtivo={fazerNd}
+                                excluirAtivo={fazerNd}
                             />
                         </div>
                     </div>

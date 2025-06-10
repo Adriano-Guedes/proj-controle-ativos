@@ -22,7 +22,7 @@ const CardsAtivos = ({ ativos, exibirDetalhesAtivo }: Props) => {
                                 <ul className="list-unstyled mt-3 mb-4">
                                     <li>
                                         <small className="text-muted d-block">Código interno</small>
-                                        {ativo.codInterno ?? ''}
+                                        {ativo.codInterno ? ativo.codInterno : "-"}
                                     </li>
                                     <li className="mt-2">
                                         <small className="text-muted d-block">Status</small>
