@@ -65,7 +65,14 @@ const HomePage = (props: Props) => {
                         </strong>
                     </div>
                     <hr className="my-3 w-75 mx-auto" />
-                    <CardsAtivos ativos={ativos} exibirDetalhesAtivo={exibirDetalhesAtivo} />
+                    <CardsAtivos ativos={ativos}
+                        exibirDetalhesAtivo={exibirDetalhesAtivo}
+                        pagina={1}
+                        fecharDetalhamentoAtivo={fecharDetalhamentoAtivo}
+                        abrirModalEditarAtivo={fazerNd}
+                        abrirModalMoverAtivo={fazerNd}
+                        excluirAtivo={fazerNd}
+                    />
                 </div>
             </div>
             {modalDetalhesAtivo && (

@@ -61,7 +61,7 @@ const RegisterPage = (props: Props) => {
                                 placeholder="Nome"
                                 {...register("nome")}
                             />
-                            <label htmlFor="floatingInput">Nome</label>
+                            <label htmlFor="floatingInput">Nome <span style={{ color: 'red' }}>*</span></label>
                             {errors.nome && <p className="text-danger mt-1">{errors.nome.message}</p>}
                         </div>
 
@@ -73,7 +73,7 @@ const RegisterPage = (props: Props) => {
                                 placeholder="Email"
                                 {...register("email")}
                             />
-                            <label htmlFor="floatingInput">Email</label>
+                            <label htmlFor="floatingInput">Email <span style={{ color: 'red' }}>*</span></label>
                             {errors.email && <p className="text-danger mt-1">{errors.email.message}</p>}
                         </div>
 
@@ -85,7 +85,7 @@ const RegisterPage = (props: Props) => {
                                 placeholder="Login"
                                 {...register("login")}
                             />
-                            <label htmlFor="floatingInput">Login</label>
+                            <label htmlFor="floatingInput">Login <span style={{ color: 'red' }}>*</span></label>
                             {errors.login && <p className="text-danger mt-1">{errors.login.message}</p>}
                         </div>
 
@@ -97,7 +97,7 @@ const RegisterPage = (props: Props) => {
                                 placeholder="Senha"
                                 {...register("senha")}
                             />
-                            <label htmlFor="floatingPassword">Senha</label>
+                            <label htmlFor="floatingPassword">Senha <span style={{ color: 'red' }}>*</span></label>
                             {errors.senha && <p className="text-danger mt-1">{errors.senha.message}</p>}
                         </div>
 

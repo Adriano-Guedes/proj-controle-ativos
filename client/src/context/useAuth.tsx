@@ -58,7 +58,6 @@ export const UserProvider = ({ children }: Props) => {
 
     const loginUser = async(login: string, password: string) => {
         await loginAPI(login, password).then((res) => {
-            console.log(res)
             if(res) {
                 localStorage.setItem("token", res?.data.token);
                 const userObj = {

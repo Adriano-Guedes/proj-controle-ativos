@@ -18,3 +18,9 @@ export const formatarMoeda = (valor: string | number): string => {
 
   return num.toFixed(2).replace('.', ',');
 };
+
+export const parseDateToInputFormat = (dateString: string): string => {
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return '';
+  return date.toISOString().split('T')[0]; // retorna 'YYYY-MM-DD'
+}

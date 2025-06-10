@@ -7,6 +7,7 @@ import RegisterPage from "../pages/RegisterPage";
 import AtivosPage from "../pages/AtivosPage";
 import UsuariosPage from "../pages/UsuarioPage";
 import HistoricoPage from "../pages/HistoricoPage";
+import LocalizacoesPage from "../pages/LocalizacaoPage";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,14 @@ export const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <HistoricoPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "localizacoes",
+                element: (
+                    <ProtectedRoute>
+                        <LocalizacoesPage />
                     </ProtectedRoute>
                 ),
             },

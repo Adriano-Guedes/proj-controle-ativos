@@ -49,3 +49,12 @@ export const getListaLocalizacao = async (filtro: string) => {
         handleError(error);
     }
 };
+
+export const deleteLocalizacao = async (id: number) => {
+    try {
+        const response = await axios.delete<LocalizacaoGet>(api + `/localizacao/${id}`);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+}

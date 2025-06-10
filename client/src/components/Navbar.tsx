@@ -15,12 +15,14 @@ const Navbar = ({ paginaAtiva }: Props) => {
     const [ativa2, setAtiva2] = useState(false);
     const [ativa3, setAtiva3] = useState(false);
     const [ativa4, setAtiva4] = useState(false);
+    const [ativa5, setAtiva5] = useState(false);
 
     useEffect(() => {
         setAtiva1(paginaAtiva === 1);
         setAtiva2(paginaAtiva === 2);
         setAtiva3(paginaAtiva === 3);
         setAtiva4(paginaAtiva === 4);
+        setAtiva5(paginaAtiva === 5);
     }, [paginaAtiva]);
 
     return (
@@ -67,6 +69,15 @@ const Navbar = ({ paginaAtiva }: Props) => {
                                 style={{ cursor: "pointer" }}
                             >
                                 Usuários
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                onClick={() => navigate("/localizacoes")}
+                                className={`nav-link ${ativa5 ? "active" : "text-white"}`}
+                                style={{ cursor: "pointer" }}
+                            >
+                                Localizações
                             </a>
                         </li>
                     </>

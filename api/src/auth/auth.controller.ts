@@ -55,7 +55,6 @@ export const createUsuario = async (req: Request, res: Response) => {
     const newUsuario = plainToInstance(CreateUsuarioDto, req.body);
     const erros = await validate(newUsuario);
 
-    console.log(newUsuario);
     if (erros.length > 0) {
       const mensagens = erros
         .map((e) => Object.values(e.constraints ?? {}))

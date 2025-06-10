@@ -137,7 +137,6 @@ export const getAtivoById = async (req: Request, res: Response) => {
 export const createAtivo = async (req: Request, res: Response) => {
   try {
     const newAtivo = plainToInstance(CreateAtivoDto, req.body);
-    console.log(newAtivo);
     const erros = await validate(newAtivo);
     if (erros.length > 0) {
       const mensagens = erros
@@ -161,8 +160,6 @@ export const createAtivo = async (req: Request, res: Response) => {
       },
     });
 
-    console.log("criado: ", novoAtivo);
-
     res.status(201).json(novoAtivo);
   } catch (e) {
     res.status(500).json({ e });
@@ -172,27 +169,18 @@ export const createAtivo = async (req: Request, res: Response) => {
 // Update ativo
 export const updateAtivo = async (req: Request, res: Response) => {
   try {
-    const {
-      nome,
-      codInterno,
-      descricao,
-      status,
-      valor,
-      dataAquisicao,
-      observacao,
-    } = req.body;
     await db.update({
       where: {
         id: parseInt(req.params.id),
       },
       data: {
-        nome,
-        codInterno,
-        descricao,
-        status,
-        valor,
-        dataAquisicao: new Date(dataAquisicao),
-        observacao,
+        nome: req.body.nome,
+        codInterno: normalizeOptional(req.body.codInterno),
+        descricao: normalizeOptional(req.body.descricao),
+        status: req.body.status,
+        valor: req.body.valor,
+        dataAquisicao: new Date(req.body.dataAquisicao),
+        observacao: normalizeOptional(req.body.observacao),
       },
     });
 
@@ -316,4 +304,9 @@ export const moveAtivo = async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({ message: "Erro ao atualizar o ativo", error });
   }
+};
+
+const normalizeOptional = (value: any) => {
+  if (typeof value !== "string") return null;
+  return value.trim() === "" ? null : value;
 };

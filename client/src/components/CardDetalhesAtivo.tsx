@@ -124,7 +124,7 @@ const CardDetalhesAtivo = ({ ativo, pagina, fecharDetalhamentoAtivo, abrirModalE
                     >
                         <IoClose size={20} />
                     </button>
-                    {pagina === 2 && (
+                    {/* {pagina === 2 && (
                         <>
                             <button
                                 type="button"
@@ -172,7 +172,7 @@ const CardDetalhesAtivo = ({ ativo, pagina, fecharDetalhamentoAtivo, abrirModalE
                                 <FaTrashAlt size={20} />
                             </button>
                         </>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>

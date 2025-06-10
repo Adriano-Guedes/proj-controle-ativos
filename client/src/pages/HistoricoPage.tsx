@@ -104,7 +104,7 @@ const HistoricoPage = (props: Props) => {
                                             value={chaveAtivo}
                                             onChange={(e) => setChaveAtivo(parseInt(e.target.value, 10))}
                                         >
-                                            <option value="">Selecione um ativo</option>
+                                            <option value="">Selecione...</option>
                                             {ativos.map((ativo) => (
                                                 <option key={ativo.id} value={ativo.id}>
                                                     {ativo.nome}
@@ -122,7 +122,7 @@ const HistoricoPage = (props: Props) => {
                                             value={chaveResponsavel}
                                             onChange={(e) => setChaveResponsavel(e.target.value)}
                                         >
-                                            <option value="">Selecione um responsável</option>
+                                            <option value="">Selecione...</option>
                                             {usuarios.map((user) => (
                                                 <option key={user.id} value={user.id}>
                                                     {user.nome}
@@ -140,7 +140,7 @@ const HistoricoPage = (props: Props) => {
                                             value={chaveLocalizacao}
                                             onChange={(e) => setChaveLocalizacao(parseInt(e.target.value, 10))}
                                         >
-                                            <option value="">Selecione uma localização</option>
+                                            <option value="">Selecione...</option>
                                             {localizacoes.map((loc) => (
                                                 <option key={loc.id} value={loc.id}>
                                                     {loc.endereco}
