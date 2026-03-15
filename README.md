@@ -73,23 +73,24 @@ The backend is responsible for authentication, business logic and data persisten
 ---
 
 ## Project Structure
+```
 proj-controle-ativos
 │
 ├── api
-│ ├── controllers
-│ ├── services
-│ ├── models
-│ ├── middleware
-│ └── prisma
+│   ├── controllers
+│   ├── services
+│   ├── models
+│   ├── middleware
+│   └── prisma
 │
 ├── client
-│ ├── components
-│ ├── pages
-│ ├── services
-│ └── hooks
+│   ├── components
+│   ├── pages
+│   ├── services
+│   └── hooks
 │
 └── README.md
-
+```
 
 ---
 
