@@ -1,107 +1,130 @@
-# 📊 Sistema de Controle de Ativos
+# Asset Management System
 
-Este projeto consiste em um sistema **cliente-servidor** desenvolvido para auxiliar no controle de ativos de uma empresa, como **maquinário, móveis, equipamentos e outros bens**.  
+A full-stack client-server application designed to manage and track company assets such as machinery, furniture, equipment and other corporate resources.
 
-O sistema permite gerenciar ativos, usuários e localizações, oferecendo recursos de autenticação, autorização e histórico de alocações.
+The system allows organizations to control asset allocation, manage users and locations, and maintain a complete history of asset movements.
 
----
-
-## 🚀 Funcionalidades
-
-- **Ativos**
-  - Cadastro, edição, exclusão e consulta.
-  - Associação de ativos a um usuário ou localidade.
-  - Consulta com filtros: nome, responsável atual ou localização.
-
-- **Usuários**
-  - CRUD completo (cadastro, edição, exclusão e listagem).
-  - Associação a cargos.
-  - Controle de acesso por **níveis de permissão**.
-  - Autenticação via **JWT**.
-
-- **Localizações**
-  - Cadastro, edição, exclusão e listagem.
-  - Associação de ativos a locais específicos.
-
-- **Histórico de Alocação**
-  - Registro automático de movimentações de ativos.
-  - Indicação de origem e destino (usuário e/ou localidade).
-  - Rastreamento da vida útil dos ativos.
+This project demonstrates the implementation of a modern web application architecture using a REST API backend and a React frontend.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Features
 
-### Backend (API - Node.js + Express + Prisma)
-- **Prisma ORM** (`@prisma/client`, `prisma`)
-- **Express**
-- **JWT (jsonwebtoken)**
-- **Bcrypt** (hash de senhas)
-- **Class-validator** e **Class-transformer**
-- **Cors**
-- **TypeScript**
+### Asset Management
+- Create, update, delete and view assets
+- Assign assets to users or locations
+- Search and filter assets by name, responsible user or location
 
-### Frontend (React)
-- **React 19**
-- **React Router DOM**
-- **React Hook Form + Yup**
-- **Axios**
-- **Bootstrap**
-- **React Icons**
-- **React Toastify**
-- **TypeScript**
+### User Management
+- Full CRUD operations
+- Role-based access control
+- Permission level management
+- Secure authentication using JWT
 
----
+### Location Management
+- Create, update and manage locations
+- Assign assets to specific locations
 
-# 📊 Asset Management System
-
-This project is a **client-server system** developed to assist in the management of company assets, such as **machinery, furniture, equipment, and other goods**.  
-
-The system allows managing assets, users, and locations, providing authentication, authorization, and allocation history tracking.
+### Asset Allocation History
+- Automatic tracking of asset movements
+- Records origin and destination of each transfer
+- Allows monitoring the asset lifecycle
 
 ---
 
-## 🚀 Features
+## Tech Stack
 
-- **Assets**
-  - Create, update, delete, and query.
-  - Associate assets with a user or location.
-  - Query with filters: name, current responsible user, or location.
+### Backend
+- Node.js
+- Express
+- Prisma ORM
+- JWT Authentication
+- Bcrypt
+- Class-validator
+- Class-transformer
+- TypeScript
 
-- **Users**
-  - Full CRUD operations (create, update, delete, list).
-  - Association with roles.
-  - Access control with **permission levels**.
-  - Authentication via **JWT**.
+### Frontend
+- React
+- React Router DOM
+- React Hook Form + Yup
+- Axios
+- Bootstrap
+- React Icons
+- React Toastify
+- TypeScript
 
-- **Locations**
-  - Create, update, delete, and list.
-  - Associate assets with specific locations.
-
-- **Allocation History**
-  - Automatic record of asset movements.
-  - Tracks origin and destination (user and/or location).
-  - Allows monitoring of asset lifecycle.
+### Database
+- Prisma ORM (relational database)
 
 ---
 
-## 🛠️ Technologies Used
+## Architecture
+The system follows a **client-server architecture**:
 
-### Backend (API - Node.js + Express + Prisma)
-- **Prisma ORM** (`@prisma/client`, `prisma`)
-- **Express**
-- **JWT (jsonwebtoken)**
-- **Bcrypt** (password hashing)
-- **Class-validator** and **Class-transformer**
-- **Cors**
-- **TypeScript**
+React Frontend
+↓
+REST API (Node.js + Express)
+↓
+Database (via Prisma ORM)
 
-### Frontend (React)
-- **React 19**
-- **React Router DOM**
-- **React Hook Form + Yup**
-- **Axios**
-- **Bootstrap**
-- **React Icons**
-- **React Toastify**
-- **TypeScript**
+The backend is responsible for authentication, business logic and data persistence, while the frontend provides the user interface and communicates with the API.
+
+---
+
+## Project Structure
+proj-controle-ativos
+│
+├── api
+│ ├── controllers
+│ ├── services
+│ ├── models
+│ ├── middleware
+│ └── prisma
+│
+├── client
+│ ├── components
+│ ├── pages
+│ ├── services
+│ └── hooks
+│
+└── README.md
+
+
+---
+
+## Installation
+
+### Clone the repository
+git clone https://github.com/Adriano-Guedes/proj-controle-ativos.git
+
+### Backend setup
+cd api
+npm install
+npm run dev
+
+### Frontend setup
+cd client
+npm install
+npm start
+
+---
+
+## Future Improvements
+- Add automated tests
+- Improve UI/UX
+- Implement asset QR code tracking
+- Add audit logs
+- Deploy system to cloud infrastructure
+
+---
+
+## Author
+Adriano Guedes  
+Full Stack Developer
+
+GitHub  
+https://github.com/Adriano-Guedes
+
+LinkedIn  
+https://www.linkedin.com/in/adriano-guedes
